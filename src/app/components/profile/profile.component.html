@@ -1,0 +1,241 @@
+<main role="main" class="col p-4">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Título del CV</h1>
+  </div>
+  <form action="">
+
+    <h4 class="mt-5 mb-2">Información Personal</h4>
+    <div class="border rounded m-0 p-0">
+      <div class="row no-gutters m-3">
+        <div class="col-sm-3 col-lg-2 pr-2 text-sm-right">
+          <label for="name">Nombre Completo</label>
+        </div>
+        <div class="col-sm pl-2">
+          <input type="text" name="name" [(ngModel)]="user.name" class="form-control" placeholder="Nombre Completo" required autofocus
+          />
+        </div>
+      </div>
+      <div class="row no-gutters m-3">
+        <div class="col-sm-3 col-lg-2 pr-2 text-sm-right">
+          <label for="email">Email</label>
+        </div>
+        <div class="col-sm pl-2">
+          <input type="email" name="email" [(ngModel)]="user.email" class="form-control" placeholder="Email" required>
+        </div>
+      </div>
+      <div class="row no-gutters m-3">
+        <div class="col-sm-3 col-lg-2 pr-2 text-sm-right">
+          <label for="telefono">Teléfono</label>
+        </div>
+        <div class="col-sm pl-2">
+          <input type="tel" name="telefono" class="form-control" [(ngModel)]="user.phone" placeholder="Teléfono" required>
+        </div>
+      </div>
+      <div class="row no-gutters m-3">
+        <div class="col-sm-3 col-lg-2 pr-2 text-sm-right">
+          <label for="direccion">Dirección</label>
+        </div>
+        <div class="col-sm pl-2">
+          <textarea name="direccion" name="direccion" cols="30" rows="3" [(ngModel)]="user.address" class="form-control" placeholder="Dirección"></textarea>
+        </div>
+      </div>
+      <div class="row no-gutters m-3">
+        <div class="col-sm-3 col-lg-2 pr-2 text-sm-right">
+          <label for="descripcion">Descripción</label>
+        </div>
+        <div class="col-sm pl-2">
+          <textarea name="descripcion" name="descripcion" [(ngModel)]="user.description" cols="30" rows="3" class="form-control" placeholder="Descripción"></textarea>
+        </div>
+      </div>
+      <div class="text-center m-3">
+        <button type="button" class="btn btn-success" (click)="onClickRegisterUserData(user)">
+          <i class="fa fa-save"></i> Guardar</button>
+      </div>
+    </div>
+
+    <h4 class="mt-5 mb-2">Experiencia</h4>
+    <div class="border rounded m-0 p-0">
+      <div class="border-bottom p-3">
+        <ul class="list-group">
+          <!-- Experiencia de Ejemplo -->
+          <li class="list-group-item">
+            <!-- Barra de opciones -->
+            <div class="btn-toolbar">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-primary">
+                  <i class="far fa-edit"></i>
+                </button>
+                <button type="button" class="btn btn-sm btn-danger">
+                  <i class="far fa-trash-alt"></i>
+                </button>
+              </div>
+            </div>
+            <h2>Empresa</h2>
+            <h4>Título de Trabajo</h4>
+            <p>
+              <span>01/01/1990</span> -
+              <span>12/12/2000</span>
+            </p>
+            <p>Descripción</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="row no-gutters m-3">
+        <div class="col-sm-3 col-lg-2 pr-2 text-sm-right">
+          <label for="titulo-trabajo">Título de Trabajo</label>
+        </div>
+        <div class="col-sm pl-2">
+          <input type="text" id="titulo-trabajo" class="form-control" placeholder="Título de Trabajo" required>
+        </div>
+      </div>
+
+      <div class="row no-gutters m-3">
+        <div class="col-sm-3 col-lg-2 pr-2 text-sm-right">
+          <label for="empresa">Empresa</label>
+        </div>
+        <div class="col-sm pl-2">
+          <input type="text" id="empresa" class="form-control" placeholder="Empresa" required>
+        </div>
+      </div>
+
+      <div class="row no-gutters m-3">
+        <div class="col-sm-3 col-lg-2 pr-2 text-sm-right">
+          <label for="fecha-inicio">Fecha Inicio</label>
+        </div>
+        <div class="col-sm pl-2">
+          <input type="date" id="fecha-inicio" class="form-control" placeholder="Fecha Inicio" required>
+        </div>
+      </div>
+
+      <div class="row no-gutters m-3">
+        <div class="col-sm-3 col-lg-2 pr-2 text-sm-right">
+          <label for="fecha-fin">Fecha Final</label>
+        </div>
+        <div class="col-sm pl-2">
+          <input type="date" id="fecha-fin" class="form-control" placeholder="Fecha Final">
+        </div>
+      </div>
+
+      <div class="row no-gutters m-3">
+        <div class="col-sm-3 col-lg-2 pr-2 text-sm-right">
+          <label for="descripcion">Descripción</label>
+        </div>
+        <div class="col-sm pl-2">
+          <input type="text" id="descripcion" class="form-control" placeholder="Descripción" required>
+        </div>
+      </div>
+
+      <div class="text-center m-3">
+        <button type="button" class="btn btn-success">
+          <i class="far fa-plus-square"></i> Añadir</button>
+      </div>
+    </div>
+
+    <h4 class="mt-5 mb-2">Educación</h4>
+    <div class="border rounded m-0 p-0">
+      <div class="border-bottom p-3">
+        <ul class="list-group">
+          <!-- Educación de Ejemplo -->
+          <li class="list-group-item">
+            <!-- Barra de opciones -->
+            <div class="btn-toolbar">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-primary">
+                  <i class="far fa-edit"></i>
+                </button>
+                <button type="button" class="btn btn-sm btn-danger">
+                  <i class="far fa-trash-alt"></i>
+                </button>
+              </div>
+            </div>
+            <h2>Institución</h2>
+            <h4>Nombre del curso</h4>
+            <p>
+              <span>01/01/1990</span> -
+              <span>12/12/2000</span>
+            </p>
+            <p>Descripción</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="row no-gutters m-3">
+        <div class="col-sm-3 col-lg-2 pr-2 text-sm-right">
+          <label for="nombre-curso">Nombre del curso</label>
+        </div>
+        <div class="col-sm pl-2">
+          <input type="text" id="nombre-curso" class="form-control" placeholder="Nombre del curso" required>
+        </div>
+      </div>
+
+      <div class="row no-gutters m-3">
+        <div class="col-sm-3 col-lg-2 pr-2 text-sm-right">
+          <label for="institucion">Institución</label>
+        </div>
+        <div class="col-sm pl-2">
+          <input type="text" id="institucion" class="form-control" placeholder="Institución" required>
+        </div>
+      </div>
+
+      <div class="row no-gutters m-3">
+        <div class="col-sm-3 col-lg-2 pr-2 text-sm-right">
+          <label for="fecha-inicio">Fecha Inicio</label>
+        </div>
+        <div class="col-sm pl-2">
+          <input type="date" id="fecha-inicio" class="form-control" placeholder="Fecha Inicio" required>
+        </div>
+      </div>
+
+      <div class="row no-gutters m-3">
+        <div class="col-sm-3 col-lg-2 pr-2 text-sm-right">
+          <label for="fecha-fin">Fecha Final</label>
+        </div>
+        <div class="col-sm pl-2">
+          <input type="date" id="fecha-fin" class="form-control" placeholder="Fecha Final">
+        </div>
+      </div>
+
+      <div class="row no-gutters m-3">
+        <div class="col-sm-3 col-lg-2 pr-2 text-sm-right">
+          <label for="descripcion">Descripción</label>
+        </div>
+        <div class="col-sm pl-2">
+          <input type="text" id="descripcion" class="form-control" placeholder="Descripción" required>
+        </div>
+      </div>
+
+      <div class="text-center m-3">
+        <button type="button" class="btn btn-success">
+          <i class="far fa-plus-square"></i> Añadir</button>
+      </div>
+    </div>
+
+    <h4 class="mt-5 mb-2">Habilidades</h4>
+    <div class="border rounded m-0 p-0">
+      <div class="m-3">
+        <h4>
+          <span class="badge badge-pill badge-secondary font-weight-normal">Linux
+            <span aria-hidden="true">&times;</span>
+          </span>
+          <span class="badge badge-pill badge-secondary font-weight-normal">Go
+            <span aria-hidden="true">&times;</span>
+          </span>
+        </h4>
+      </div>
+      <div class="border-bottom"></div>
+
+      <div class="row justify-content-center p-3">
+        <div class="col-sm-11">
+          <input type="text" class="form-control" placeholder="Habilidad" name="habilidad[]">
+        </div>
+        <div class="w-100"></div>
+        <div class="col text-center mt-3">
+          <button type="button" class="btn btn-success">
+            <i class="far fa-plus-square"></i> Añadir</button>
+        </div>
+      </div>
+    </div>
+
+  </form>
+</main>

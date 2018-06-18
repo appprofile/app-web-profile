@@ -15,6 +15,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { RegisterPageComponent } from './components/register-page/register-page.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { ProfileComponent } from './components/profile/profile.component';
 export function getTranslateFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -29,7 +30,8 @@ export function getTranslateFactory(http: HttpClient) {
     SidebarComponent,
     RegisterPageComponent,
     LoginPageComponent,
-    NotFoundPageComponent
+    NotFoundPageComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

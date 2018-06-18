@@ -3,12 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterPageComponent } from './components/register-page/register-page.component';
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
   {path: 'login', component: LoginPageComponent},
   {path: 'register', component: RegisterPageComponent},
+  {path: 'profile', component: ProfileComponent},
   // {path: 'private', component: PrivatePageComponent, canActivate: [AuthGuard]},
   {path: '**', component: NotFoundPageComponent},
 ];
