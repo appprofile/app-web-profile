@@ -4,5 +4,18 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  auth0: {
+    domain: '',
+    clientid: '',
+    clientSecret: '',
+    audience: '',
+    callback: '',
+    scope: ''
+  },
+  api: {
+    domain: '',
+    port: 80,
+    version: ''
+  }
 };

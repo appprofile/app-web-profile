@@ -19,10 +19,15 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+        "../node_modules/bootstrap/dist/css/bootstrap.css",
+        "../node_modules/font-awesome/css/font-awesome.css",
         "styles.scss"
       ],
       "scripts": [
-        "https://cdn.auth0.com/js/auth0/9.5.1/auth0.min.js"
+        "../node_modules/auth0-js/build/auth0.min.js",
+        "../node_modules/jquery/dist/jquery.js",
+        "../node_modules/popper.js/dist/umd/popper.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
@@ -58,5 +63,8 @@
   "defaults": {
     "styleExt": "scss",
     "component": {}
+  },
+  "warnings": {
+    "typescriptMismatch": false
   }
 }
