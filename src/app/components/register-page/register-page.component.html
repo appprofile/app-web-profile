@@ -1,3 +1,25 @@
-<p>
-  register-page works!
-</p>
+<div class="col-md-6 mx-auto">
+    <div class="card bg-default">
+      <div class="card-body">
+        <h2 class="text-center">Inicio de Sesion</h2>
+        <form (submit)="onSubmitRegister()">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" [(ngModel)]="email" id="email" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="password">Contraseña</label>
+            <input type="password" name="password" [(ngModel)]="password" class="form-control">
+          </div>
+          <div class="form-group">
+              <label for="password">Repetir Contraseña</label>
+              <input type="password" name="password" [(ngModel)]="repassword" class="form-control">
+            </div>
+          <div class="form-group">
+            <button type="submit" name="" id="" class="btn btn-primary btn-lg btn-block">Registrar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

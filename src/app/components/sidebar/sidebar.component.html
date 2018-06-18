@@ -1,3 +1,66 @@
-<p>
-  sidebar works!
-</p>
+<nav class="col-md-2 sidebar navbar-expand-md" *ngIf="isLogin">
+  <div class="sidebar-sticky navbar-collapse collapse" id="navbarSupportedContent">
+    <input class="form-control form-control-dark w-100 d-md-none" type="text" placeholder="Buscar" aria-label="Buscar">
+
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+      <span>Menú 1</span>
+    </h6>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link active" href="#">
+          <span data-feather="Inicio"></span>
+          Inicio
+          <span class="sr-only">(actual)</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <span data-feather="opcion2"></span>
+          Opcion 2
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <span data-feather="opcion3"></span>
+          Opcion 3
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <span data-feather="etc"></span>
+          Etc...
+        </a>
+      </li>
+    </ul>
+
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+      <span>Menú 2</span>
+    </h6>
+    <ul class="nav flex-column mb-2">
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <span data-feather="opcion1"></span>
+          Opcion 1
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <span data-feather="opcion2"></span>
+          Opcion 2
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <span data-feather="opcion3"></span>
+          Opcion 3
+        </a>
+      </li>
+    </ul>
+
+    <ul class="nav flex-column d-md-none">
+      <li class="nav-item text-nowrap">
+        <a class="nav-link" href="#">Cerrar Sesión</a>
+      </li>
+    </ul>
+  </div>
+</nav>
