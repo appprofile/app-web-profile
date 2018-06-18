@@ -14,10 +14,22 @@ import { AppComponent } from './app.component';
 
 /* Services. */
 import { Auth0Service } from '@services/auth0/auth0.service';
+import { HomePageComponent } from './components/home-page/home-page.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { RegisterPageComponent } from './components/register-page/register-page.component';
+import { LoginPageComponent } from './components/login-page/login-page.component';
+import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomePageComponent,
+    NavbarComponent,
+    SidebarComponent,
+    RegisterPageComponent,
+    LoginPageComponent,
+    NotFoundPageComponent
   ],
   imports: [
     BrowserModule,
