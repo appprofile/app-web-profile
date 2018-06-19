@@ -5,6 +5,9 @@ export class UserData {
     public phone: number;
     public address: string;
     public description: string;
+    public abilities: any;
+    public education: any;
+    public experiences: any;
 
     constructor() {
         this.id = '';
@@ -13,5 +16,6 @@ export class UserData {
         this.phone = 0;
         this.address = '';
         this.description = '';
+        this.abilities = [];
     }
 }

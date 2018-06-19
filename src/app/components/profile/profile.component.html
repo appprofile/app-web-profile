@@ -74,7 +74,7 @@
     <h4 class="mt-5 mb-2">Experiencia</h4>
     <div class="border rounded m-0 p-0">
       <div class="border-bottom p-3">
-        <div *ngIf="jobs.length > 0">
+        <div *ngIf="jobs && jobs.length > 0">
           <ul class="list-group">
             <!-- Experiencia de Ejemplo -->
             <li class="list-group-item" *ngFor="let job of jobs; let i = index">
@@ -234,7 +234,7 @@
     <h4 class="mt-5 mb-2">Habilidades</h4>
     <div class="border rounded m-0 p-0">
       <div class="m-3">
-        <h4 *ngIf="abilities.length > 0">
+        <h4 *ngIf="abilities && abilities.length > 0">
           <span class="badge badge-pill badge-secondary font-weight-normal badged" *ngFor="let abilitie of abilities; let i = index">
             {{abilitie}}
             <span aria-hidden="true" class="delete" (click)="onClickDeleteSkill(i)">&times;</span>

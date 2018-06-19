@@ -1,23 +1,22 @@
-<nav *ngIf="isLogged; else login" class="navbar navbar-dark navbar-expand-md fixed-top bg-dark flex-md-nowrap p-0 shadow logged">
-  <a class="navbar-brand col col-md-auto mr-0" href="#">Perfil</a>
+<nav *ngIf="auth0Service.isAuthenticated(); else login" class="navbar navbar-dark navbar-expand-md fixed-top bg-dark flex-md-nowrap p-0 shadow logged">
+  <a class="navbar-brand col col-md-auto mr-0" href="#">AppProfile</a>
   <button *ngIf="isLogged" type="button" class="navbar-toggler col-auto mx-3" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <!-- <input class="form-control form-control-dark w-100 d-none d-md-block" type="text" placeholder="Buscar" aria-label="Buscar"> -->
   <div class="w-100 d-none d-md-block"></div>
   <ul class="navbar-nav px-3 d-none d-md-block">
     <li class="nav-item text-nowrap">
-      <a class="nav-link" href="#">Cerrar Sesión</a>
+      <a (click)="auth0Service.logout()" class="nav-link">Cerrar Sesión</a>
     </li>
   </ul>
 </nav>
 <ng-template #login>
   <nav class="navbar navbar-dark fixed-top bg-dark flex-nowrap p-0 shadow">
-    <a class="navbar-brand col-6 col-sm-auto mr-0" href="#">Perfil</a>
+    <a class="navbar-brand col-6 col-sm-auto mr-0">AppProfile</a>
     <div class="w-100"></div>
     <ul class="navbar-nav px-3">
       <li class="nav-item text-nowrap">
-        <a class="nav-link" href="#">Iniciar Sesión</a>
+        <a (click)="auth0Service.login()" class="nav-link">Ingresar</a>
       </li>
     </ul>
   </nav>

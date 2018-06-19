@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
-import { Experience } from '../../models/experience';
-import { UserData } from '../../models/user-data';
-import { BaseService } from '../base/base.service';
+import { Experience } from '@models/experience';
+import { UserData } from '@models/user-data';
+import { BaseService } from '@services/base/base.service';
 
 @Injectable()
 export class ProfileService extends BaseService {
