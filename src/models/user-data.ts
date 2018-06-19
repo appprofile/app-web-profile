@@ -1,18 +1,16 @@
 export class UserData {
-    public id: number;
+    public id: string;
     public name: string;
     public email: string;
-    public phone: string;
+    public phone: number;
     public address: string;
     public description: string;
-    /**
-     *
-     */
+
     constructor() {
-        this.id = 0;
+        this.id = '';
         this.name = '';
         this.email = '';
-        this.phone = '';
+        this.phone = 0;
         this.address = '';
         this.description = '';
     }

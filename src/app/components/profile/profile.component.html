@@ -40,7 +40,7 @@
           <label for="telefono">Teléfono</label>
         </div>
         <div class="col-sm pl-2">
-          <input *ngIf="edit.user" type="tel" name="telefono" class="form-control" [(ngModel)]="user.phone" placeholder="Teléfono"
+          <input *ngIf="edit.user" type="number" name="telefono" class="form-control" [(ngModel)]="user.phone" placeholder="Teléfono"
             required />
           <div *ngIf="!edit.user" class="form-control disabled">{{user.phone}}</div>
         </div>
@@ -203,7 +203,7 @@
           <label for="fecha-inicio">Fecha Inicio</label>
         </div>
         <div class="col-sm pl-2">
-          <input type="date" name="fecha-inicio"  [(ngModel)]="course.dateIni" class="form-control" placeholder="Fecha Inicio" required>
+          <input type="date" name="fecha-inicio" [(ngModel)]="course.dateIni" class="form-control" placeholder="Fecha Inicio" required />
         </div>
       </div>
 
@@ -212,7 +212,7 @@
           <label for="fecha-fin">Fecha Final</label>
         </div>
         <div class="col-sm pl-2">
-          <input type="date" name="fecha-fin"  [(ngModel)]="course.dateEnd" class="form-control" placeholder="Fecha Final">
+          <input type="date" name="fecha-fin" [(ngModel)]="course.dateEnd" class="form-control" placeholder="Fecha Final" />
         </div>
       </div>
 
@@ -221,7 +221,7 @@
           <label for="descripcion">Descripción</label>
         </div>
         <div class="col-sm pl-2">
-          <input type="text" name="descripcion" [(ngModel)]="course.description" class="form-control" placeholder="Descripción" required>
+          <input type="text" name="descripcion" [(ngModel)]="course.description" class="form-control" placeholder="Descripción" required />
         </div>
       </div>
 
@@ -234,9 +234,9 @@
     <h4 class="mt-5 mb-2">Habilidades</h4>
     <div class="border rounded m-0 p-0">
       <div class="m-3">
-        <h4 *ngIf="skills.length > 0">
-          <span class="badge badge-pill badge-secondary font-weight-normal badged" *ngFor="let skill of skills; let i = index">
-            {{skill.name}}
+        <h4 *ngIf="abilities.length > 0">
+          <span class="badge badge-pill badge-secondary font-weight-normal badged" *ngFor="let abilitie of abilities; let i = index">
+            {{abilitie}}
             <span aria-hidden="true" class="delete" (click)="onClickDeleteSkill(i)">&times;</span>
           </span>
         </h4>
@@ -245,7 +245,7 @@
 
       <div class="row justify-content-center p-3">
         <div class="col-sm-11">
-          <input type="text" class="form-control" [(ngModel)]="skill.name" (keydown)="onKeyDownAddSkill($event)" placeholder="Habilidad" name="habilidad">
+          <input type="text" class="form-control" [(ngModel)]="abilitie" (keydown)="onKeyDownAddSkill($event)" placeholder="Habilidad" name="habilidad">
         </div>
         <div class="w-100"></div>
         <div class="col text-center mt-3">

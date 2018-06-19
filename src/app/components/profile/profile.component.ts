@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FlashMessagesService } from 'angular2-flash-messages';
 import { Courses } from '../../../models/courses';
 import { Experience } from '../../../models/experience';
-import { Skills } from '../../../models/skills';
 import { UserData } from '../../../models/user-data';
+import { ProfileService } from '../../../services/profile/profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -14,11 +15,11 @@ export class ProfileComponent implements OnInit {
   public user: UserData;
   public jobs: Experience[] = [];
   public courses: Courses[] = [];
-  public skills: Skills[] = [];
+  public abilities = [];
 
   public job: Experience;
   public course: Courses;
-  public skill: Skills;
+  public abilitie;
 
   public edit = {
     user: true,
@@ -26,35 +27,52 @@ export class ProfileComponent implements OnInit {
     courses: true
   };
 
-  constructor() { }
+  constructor(public profileService: ProfileService,
+    public flashMessagesService: FlashMessagesService) { }
 
   ngOnInit() {
     this.user = new UserData();
     this.job = new Experience();
     this.course = new Courses();
-    this.skill = new Skills();
     this.edit.user = true;
   }
 
-  private addSkill(skill: Skills) {
+  private addSkill(skill: string) {
 
-    const found = this.skills.find(function(element) {
-      return element.name === skill.name;
+    const found = this.abilities.find(function (element) {
+      return element === skill;
     });
-    if (skill.name !== '' && found === undefined) {
-      skill.id = this.skills.length;
-      this.skills.push(skill);
+    if (skill !== '' && found === undefined) {
+      this.abilities.push(skill);
     }
   }
 
   onClickRegisterUserData() {
-    if (this.user.id === 0) {
-      this.user.id = 1;
-      console.log('registrar');
+
+    if (this.user.id === '') {
+      this.profileService.registerUserData(this.user).subscribe(
+        (data) => {
+          this.flashMessagesService.show('Datos Registrados correctamente.',
+          {cssClass: 'alert-success', timeout : 4000});
+           this.user.id = data.id;
+          this.edit.user = false;
+        }, (error) => {
+          this.flashMessagesService.show(`Error registrando datos del usuario. ${error.error.error_message}`,
+          {cssClass: 'alert-danger', timeout : 4000});
+        }
+      );
     } else {
-      console.log('editar');
+      this.profileService.updateUserData(this.user.id, this.user).subscribe(
+        (data) => {
+          this.flashMessagesService.show('Datos Editados correctamente.',
+          {cssClass: 'alert-success', timeout : 4000});
+          this.edit.user = false;
+        }, (error) => {
+          this.flashMessagesService.show(`Error editando datos del usuario. ${error.error.error_message}`,
+          {cssClass: 'alert-danger', timeout : 4000});
+        }
+      );
     }
-    this.edit.user = false;
   }
 
   onClickEditUserData() {
@@ -75,7 +93,7 @@ export class ProfileComponent implements OnInit {
 
   onClickDeleteJob(index: number) {
     if (index >= 0) {
-      this.jobs.splice(index , 1);
+      this.jobs.splice(index, 1);
       this.job = new Experience();
     }
   }
@@ -94,14 +112,14 @@ export class ProfileComponent implements OnInit {
 
   onClickDeleteCourse(index: number) {
     if (index >= 0) {
-      this.courses.splice(index , 1);
+      this.courses.splice(index, 1);
       this.course = new Courses();
     }
   }
 
   onClickAddSkill() {
-    this.addSkill(this.skill);
-    this.skill = new Skills();
+    this.addSkill(this.abilitie);
+    this.abilitie = '';
   }
 
   onKeyDownAddSkill(event) {
@@ -112,8 +130,8 @@ export class ProfileComponent implements OnInit {
 
   onClickDeleteSkill(index: number) {
     if (index >= 0) {
-      this.skills.splice(index , 1);
-      this.skill = new Skills();
+      this.abilities.splice(index, 1);
+      this.abilitie = '';
     }
   }
 

@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Injectable } from '@angular/core';
 import { environment } from '@environments/environment';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class BaseService {
@@ -9,7 +9,7 @@ export class BaseService {
     protected urlbase: string;
 
     constructor(protected http: HttpClient) {
-        this.urlbase = `https://${environment.api.domain}:${environment.api.port}/${environment.api.version}/`;
+        this.urlbase = `https://${environment.api.domain}/${environment.api.version}/`;
     }
 
     protected post(url: string, model: any, options: any): Observable<any> {
