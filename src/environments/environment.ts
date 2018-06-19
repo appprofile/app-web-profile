@@ -5,17 +5,17 @@
 
 export const environment = {
   production: false,
+  publichost: 'stripe.appwebprofile.ultrahook.com',
   auth0: {
-    domain: '',
-    clientid: '',
-    clientSecret: '',
+    domain: 'app-profile.auth0.com',
+    clientid: 'lUnF8NKF9FBehcR3YcAxe4z0HQo3C2z3',
     audience: '',
-    callback: '',
-    scope: ''
+    callback: 'callback',
+    scope: 'openid profile email'
   },
   api: {
     domain: 'de3c6101.ngrok.io',
-    port: 80,
+    port: '80',
     version: 'v1'
   }
 };

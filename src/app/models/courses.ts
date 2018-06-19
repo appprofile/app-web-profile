@@ -5,7 +5,7 @@ export class Courses {
     public from: string;
     public to: string;
     public description: string;
-    // not mappep
+    // Not mappep
     public index: number;
 
     public constructor() {

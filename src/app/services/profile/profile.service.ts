@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
+/* Models. */
 import { Courses } from '@models/courses';
 import { Experience } from '@models/experience';
 import { UserData } from '@models/user-data';
-import { BaseService } from '../base/base.service';
+/* Services. */
+import { BaseService } from '@services/base/base.service';
 
 @Injectable()
 export class ProfileService extends BaseService {

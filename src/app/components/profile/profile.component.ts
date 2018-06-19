@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FlashMessagesService } from 'angular2-flash-messages';
+/* Models. */
 import { Courses } from '@models/courses';
 import { Experience } from '@models/experience';
 import { UserData } from '@models/user-data';
+/* Services. */
 import { ProfileService } from '@services/profile/profile.service';
 
 @Component({
