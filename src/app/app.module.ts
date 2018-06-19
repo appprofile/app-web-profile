@@ -1,10 +1,11 @@
-import { HttpClient, HttpClientModule} from "@angular/common/http";
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { BsTableModule } from "es-ng-bs-table";
+import { FlashMessagesModule, FlashMessagesService } from 'angular2-flash-messages';
+import { BsTableModule } from 'es-ng-bs-table';
 /* Services. */
 import { Auth0Service } from '../services/auth0/auth0.service';
 import { ProfileService } from '../services/profile/profile.service';
@@ -43,6 +44,7 @@ export function getTranslateFactory(http: HttpClient) {
     FormsModule,
     BsTableModule,
     HttpClientModule,
+    FlashMessagesModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -54,6 +56,7 @@ export function getTranslateFactory(http: HttpClient) {
   providers: [
     Auth0Service,
     ProfileService,
+    FlashMessagesService
   ],
   bootstrap: [AppComponent]
 })

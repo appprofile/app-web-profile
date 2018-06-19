@@ -14,12 +14,11 @@ export class ProfileService extends BaseService {
 
 
   registerUserData(data: UserData) {
-    this.post('/user', data, null).subscribe(
-      (response) => {
+    return this.post('profile', data, []);
+  }
 
-    }, (error) => {
-
-    });
+  updateUserData(userId: string, userData: UserData) {
+    return this.patch(`profile/${userId}`, userData, []);
   }
 
 }

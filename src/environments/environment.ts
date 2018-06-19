@@ -14,8 +14,8 @@ export const environment = {
     scope: ''
   },
   api: {
-    domain: '',
+    domain: 'de3c6101.ngrok.io',
     port: 80,
-    version: ''
+    version: 'v1'
   }
 };
