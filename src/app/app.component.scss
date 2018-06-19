@@ -1,9 +1,11 @@
+@import '~assets/variables.scss';
+
 .panel-content.logged {
-  margin-top: 48px; /* Height of navbar */
+  margin-top: $navbarHeight;
 }
 
 @media (min-width: 768px) {
   .panel-content.logged > .body {
-    margin-left: 200px;
+    margin-left: $sidebarWidth;
   }
 }
