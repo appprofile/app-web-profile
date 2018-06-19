@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
+import { Courses } from '../../models/courses';
 import { Experience } from '../../models/experience';
 import { UserData } from '../../models/user-data';
 import { BaseService } from '../base/base.service';
@@ -32,6 +33,18 @@ export class ProfileService extends BaseService {
 
   deleteUserExperience(userId: string, experienceId: string) {
     return this.delete(`profile/${userId}/experience/${experienceId}`, []);
+  }
+
+  registerUserEducation(userId: string, userEducation: Courses) {
+    return this.post(`profile/${userId}/education`, userEducation, []);
+  }
+
+  updateUserEducation(userId: string, educationId: string, userEducation: Courses) {
+    return this.patch(`profile/${userId}/education/${educationId}`, userEducation, []);
+  }
+
+  deleteUserEducation(userId: string, educationId: string) {
+    return this.delete(`profile/${userId}/education/${educationId}`, []);
   }
 
 }

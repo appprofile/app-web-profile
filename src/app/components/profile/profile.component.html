@@ -170,10 +170,10 @@
               </div>
             </div>
             <h2>{{course.institute}}</h2>
-            <h4>{{course.name}}</h4>
+            <h4>{{course.course}}</h4>
             <p>
-              <span>{{course.dateIni}}</span> -
-              <span>{{course.dateEnd}}</span>
+              <span>{{course.from}}</span> -
+              <span>{{course.to}}</span>
             </p>
             <p>{{course.description}}</p>
           </li>
@@ -185,7 +185,7 @@
           <label for="nombre-curso">Nombre del curso</label>
         </div>
         <div class="col-sm pl-2">
-          <input type="text" name="title" [(ngModel)]="course.name" class="form-control" placeholder="Nombre del curso" required>
+          <input type="text" name="title" [(ngModel)]="course.course" class="form-control" placeholder="Nombre del curso" required>
         </div>
       </div>
 
@@ -203,7 +203,7 @@
           <label for="fecha-inicio">Fecha Inicio</label>
         </div>
         <div class="col-sm pl-2">
-          <input type="date" name="fecha-inicio" [(ngModel)]="course.dateIni" class="form-control" placeholder="Fecha Inicio" required />
+          <input type="date" name="fecha-inicio" [(ngModel)]="course.from" class="form-control" placeholder="Fecha Inicio" required />
         </div>
       </div>
 
@@ -212,7 +212,7 @@
           <label for="fecha-fin">Fecha Final</label>
         </div>
         <div class="col-sm pl-2">
-          <input type="date" name="fecha-fin" [(ngModel)]="course.dateEnd" class="form-control" placeholder="Fecha Final" />
+          <input type="date" name="fecha-fin" [(ngModel)]="course.to" class="form-control" placeholder="Fecha Final" />
         </div>
       </div>
 
