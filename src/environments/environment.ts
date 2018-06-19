@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  publichost: 'stripe.appwebprofile.ultrahook.com',
+  publichost: 'appwebprofile.localtunnel.me',
   auth0: {
     domain: 'app-profile.auth0.com',
     clientid: 'lUnF8NKF9FBehcR3YcAxe4z0HQo3C2z3',

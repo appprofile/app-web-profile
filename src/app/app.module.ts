@@ -18,11 +18,14 @@ import { AppComponent } from './app.component';
 import { HomePageComponent } from '@components/home-page/home-page.component';
 import { NavbarComponent } from '@components/navbar/navbar.component';
 import { NotFoundPageComponent } from '@components/not-found-page/not-found-page.component';
-import { RegisterPageComponent } from '@components/register-page/register-page.component';
 import { SidebarComponent } from '@components/sidebar/sidebar.component';
 import { ProfileComponent } from '@components/profile/profile.component';
 import { ProfilesComponent } from '@components/profiles/profiles.component';
 import { CallbackPageComponent } from '@components/callback-page/callback-page.component';
+import { ProfileViewPageComponent } from '@components/profile-view-page/profile-view-page.component';
+/* Guards. */
+import { ScopeGuard } from '@guards/auth0/scope.guard';
+import { LoginGuard } from '@guards/auth0/login.guard';
 
 @NgModule({
   declarations: [
@@ -30,11 +33,11 @@ import { CallbackPageComponent } from '@components/callback-page/callback-page.c
     HomePageComponent,
     NavbarComponent,
     SidebarComponent,
-    RegisterPageComponent,
     NotFoundPageComponent,
     ProfileComponent,
     ProfilesComponent,
-    CallbackPageComponent
+    CallbackPageComponent,
+    ProfileViewPageComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,9 @@ import { CallbackPageComponent } from '@components/callback-page/callback-page.c
   providers: [
     Auth0Service,
     ProfileService,
-    FlashMessagesService
+    FlashMessagesService,
+    ScopeGuard,
+    LoginGuard
   ],
   bootstrap: [AppComponent]
 })

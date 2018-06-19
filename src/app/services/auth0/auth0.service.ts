@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable} from 'rxjs/Rx';
 import { filter, map, mergeMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import * as auth0 from 'auth0-js';
@@ -33,7 +33,7 @@ export class Auth0Service {
         /*console.log(authResult);*/
         window.location.hash = '';
         this.setSession(authResult);
-        this.router.navigate(['/dashboard/users']);
+        this.router.navigate(['/profile']);
       } else if (err) {
         const errCode = ':lock: 401';
         this.router.navigate(['/error'], { queryParams: { errorCode: errCode, errorMessage: err.errorDescription } });
@@ -77,7 +77,7 @@ export class Auth0Service {
     this.unscheduleRenewal();
 
     // Go back to the home route
-    this.router.navigate(['/home']);
+    this.router.navigate(['/']);
   }
 
   public isAuthenticated(): boolean {
