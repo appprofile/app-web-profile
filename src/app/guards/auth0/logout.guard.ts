@@ -9,7 +9,7 @@ export class LogoutGuard implements CanActivate {
 
  canActivate(): boolean {
   if (this.auth0Service.isAuthenticated()) {
-   this.router.navigate(['/']);
+   this.router.navigate(['/profile']);
    return false;
   }
   return true;
