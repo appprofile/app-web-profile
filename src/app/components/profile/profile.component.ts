@@ -73,6 +73,9 @@ export class ProfileComponent implements OnInit {
   onClickRegisterUserData() {
 
     if (this.user.id === '') {
+      if (this.abilities.length > 0) {
+        this.user.abilities = this.abilities;
+      }
       this.profileService.registerUserData(this.user).subscribe(
         (data) => {
           this.flashMessagesService.show('Datos Registrados correctamente.', this.alertProp.success);
@@ -216,20 +219,24 @@ export class ProfileComponent implements OnInit {
   }
 
   onClickAddSkill() {
-    this.addSkill(this.abilitie);
-    this.abilitie = '';
+    if (this.user.id !== '') {
+      this.onClickRegisterUserData();
+    }
   }
 
   onKeyDownAddSkill(event) {
     if (event.keyCode === 13) {
-      this.onClickAddSkill();
+      this.addSkill(this.abilitie);
+      this.abilitie = '';
     }
   }
 
   onClickDeleteSkill(index: number) {
     if (index >= 0) {
+      this.onClickRegisterUserData();
       this.abilities.splice(index, 1);
       this.abilitie = '';
+
     }
   }
 
