@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FlashMessagesService } from 'angular2-flash-messages';
 /* Models. */
 import { Courses } from '@models/courses';
 import { Experience } from '@models/experience';
 import { UserData } from '@models/user-data';
 /* Services. */
 import { ProfileService } from '@services/profile/profile.service';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-profile',
@@ -37,10 +37,16 @@ export class ProfileComponent implements OnInit {
     public flashMessagesService: FlashMessagesService) { }
 
   ngOnInit() {
+    const storedToken: string = localStorage.getItem('user_id');
     this.user = new UserData();
     this.job = new Experience();
     this.course = new Courses();
     this.edit.user = true;
+    if (storedToken) {
+      this.user.id = storedToken;
+      this.fillObjects(storedToken);
+    }
+
   }
 
   private addSkill(skill: string) {
@@ -54,7 +60,7 @@ export class ProfileComponent implements OnInit {
 
   findExperience(id: string) {
     const found = this.jobs.find(function (element, index) {
-      if ( element.id === id) {
+      if (element.id === id) {
         element.index = index;
         return true;
       }
@@ -64,7 +70,7 @@ export class ProfileComponent implements OnInit {
 
   findCourse(id: string) {
     const found = this.courses.find(function (element, index) {
-      if ( element.id === id) {
+      if (element.id === id) {
         element.index = index;
         return true;
       }
@@ -241,5 +247,76 @@ export class ProfileComponent implements OnInit {
 
     }
   }
+
+  fillObjects(userId: string) {
+    /*
+    "experiences": [
+        {
+            "id": "5b2956e46679d7003d5349de",
+            "title": "asdasd",
+            "company": "asdasd",
+            "from": "2018-05-27T04:00:00Z",
+            "to": "2018-06-11T04:00:00Z",
+            "description": "consume los mensajes de los clientes",
+            "created": "2018-06-19T19:17:56.946Z",
+            "updated": "2018-06-19T19:17:56.946Z"
+        },
+        {
+            "id": "5b295b126679d7003d5349df",
+            "title": "asdasd",
+            "company": "asd",
+            "from": "2018-06-11T04:00:00Z",
+            "to": "2018-06-28T04:00:00Z",
+            "description": "consume los mensajes de los clientes",
+            "created": "2018-06-19T19:35:46.03Z",
+            "updated": "2018-06-19T19:35:46.03Z"
+        }
+    ],
+    "educations": [],
+    "abilities": [
+        "sairio",
+        "antonio",
+        "pena",
+        "pulgar"
+    ],
+    "created": "0001-01-01T00:00:00Z",
+    "updated": "2018-06-19T19:16:36.404Z"*/
+    this.profileService.registerUserData(this.user).subscribe(
+      (data) => {
+        this.user.id = data.id;
+        this.user.name = data.name;
+        this.user.address = data.address;
+        this.user.phone = data.phone;
+        this.user.description = (data.description !== undefined) ? data.description : '';
+        this.user.email = (data.email !== undefined) ? data.email : '';
+        if (data.abilities.length > 0) {
+          this.abilities = data.abilities;
+        }
+
+        if (data.experiences.length > 0) {
+          this.fillExperiences(data.experiences);
+        }
+      }, (error) => {
+        this.flashMessagesService.show(`Error obteniendo datos del usuario. ${error.error.error_message}`, this.alertProp.error);
+      }
+    );
+  }
+
+  private fillExperiences(experiences: any) {
+    for (let index = 0; index < experiences.length; index++) {
+      const element = experiences[index];
+      const obj = new Experience();
+      const d1 = new Date(element.from);
+      const d2 = new Date(element.to);
+      obj.id = element.id;
+      obj.title = element.title;
+      obj.company = element.company;
+      obj.from = `${d1.getFullYear()}-${d1.getDate()}-${d1.getDay()}`;
+      obj.to = `${d2.getFullYear()}-${d2.getDate()}-${d2.getDay()}`;
+      obj.description = element.description;
+      this.jobs.push(obj);
+    }
+  }
+  private fillCourses() {}
 
 }
