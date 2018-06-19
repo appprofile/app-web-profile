@@ -57,13 +57,25 @@ export class ProfileComponent implements OnInit {
         return true;
       }
     });
+    return found;
+  }
 
+  findCourse(id: string) {
+    const found = this.courses.find(function (element, index) {
+      if ( element.id === id) {
+        element.index = index;
+        return true;
+      }
+    });
     return found;
   }
 
   onClickRegisterUserData() {
 
     if (this.user.id === '') {
+      if (this.abilities.length > 0) {
+        this.user.abilities = this.abilities;
+      }
       this.profileService.registerUserData(this.user).subscribe(
         (data) => {
           this.flashMessagesService.show('Datos Registrados correctamente.', this.alertProp.success);
@@ -149,9 +161,40 @@ export class ProfileComponent implements OnInit {
   }
 
   onClickAddCourse() {
-    this.course.id = this.courses.length;
-    this.courses.push(this.course);
-    this.course = new Courses();
+    if (this.user.id !== '') {
+
+      this.course.from = new Date(this.course.from + ' 00:00:00').toISOString();
+      this.course.to = new Date(this.course.to + ' 00:00:00').toISOString();
+
+      if (this.course.id === '') {
+        this.profileService.registerUserEducation(this.user.id, this.course).subscribe(
+          (data) => {
+            this.flashMessagesService.show('Educacion registrada correctamente.', this.alertProp.success);
+            this.course.id = data.id;
+            this.courses.push(this.course);
+            this.course = new Courses();
+          }, (error) => {
+            this.flashMessagesService.show(`Error registrando datos de la educacion. ${error.error.error_message}`, this.alertProp.error);
+          }
+        );
+
+      } else {
+        this.profileService.updateUserEducation(this.user.id, this.course.id, this.course).subscribe(
+          (data) => {
+            this.flashMessagesService.show('Educacion registrada correctamente.', this.alertProp.success);
+            const tmp = this.findCourse(this.course.id);
+            if (tmp !== undefined) {
+              this.courses[this.course.index] = this.course;
+            }
+            this.course = new Courses();
+          }, (error) => {
+            this.flashMessagesService.show(`Error registrando datos de la educacion. ${error.error.error_message}`, this.alertProp.error);
+          }
+        );
+      }
+    } else {
+      this.flashMessagesService.show(`Error editando datos del usuario.`, this.alertProp.error);
+    }
   }
 
   onClickEditCourse(index: number) {
@@ -162,26 +205,38 @@ export class ProfileComponent implements OnInit {
 
   onClickDeleteCourse(index: number) {
     if (index >= 0) {
-      this.courses.splice(index, 1);
-      this.course = new Courses();
+      const tmp = this.courses[index];
+      this.profileService.deleteUserEducation(this.user.id, tmp.id).subscribe(
+        (data) => {
+          this.flashMessagesService.show('Educacion eliminada correctamente.', this.alertProp.success);
+          this.courses.splice(index, 1);
+          this.course = new Courses();
+        }, (error) => {
+          this.flashMessagesService.show(`Error eliminando datos de la educacion. ${error.error.error_message}`, this.alertProp.error);
+        }
+      );
     }
   }
 
   onClickAddSkill() {
-    this.addSkill(this.abilitie);
-    this.abilitie = '';
+    if (this.user.id !== '') {
+      this.onClickRegisterUserData();
+    }
   }
 
   onKeyDownAddSkill(event) {
     if (event.keyCode === 13) {
-      this.onClickAddSkill();
+      this.addSkill(this.abilitie);
+      this.abilitie = '';
     }
   }
 
   onClickDeleteSkill(index: number) {
     if (index >= 0) {
+      this.onClickRegisterUserData();
       this.abilities.splice(index, 1);
       this.abilitie = '';
+
     }
   }
 
