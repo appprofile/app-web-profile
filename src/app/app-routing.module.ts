@@ -4,6 +4,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ProfilesComponent } from './components/profiles/profiles.component';
 import { RegisterPageComponent } from './components/register-page/register-page.component';
 
 const routes: Routes = [
@@ -11,6 +12,7 @@ const routes: Routes = [
   {path: 'login', component: LoginPageComponent},
   {path: 'register', component: RegisterPageComponent},
   {path: 'profile', component: ProfileComponent},
+  {path: 'profiles', component: ProfilesComponent},
   // {path: 'private', component: PrivatePageComponent, canActivate: [AuthGuard]},
   {path: '**', component: NotFoundPageComponent},
 ];

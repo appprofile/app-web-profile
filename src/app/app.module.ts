@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
+import {HttpClientModule} from "@angular/common/http";
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { BsTableModule } from "es-ng-bs-table";
 /* Services. */
 import { Auth0Service } from '../services/auth0/auth0.service';
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +18,7 @@ import { NotFoundPageComponent } from './components/not-found-page/not-found-pag
 import { RegisterPageComponent } from './components/register-page/register-page.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ProfilesComponent } from './components/profiles/profiles.component';
 export function getTranslateFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -31,12 +34,15 @@ export function getTranslateFactory(http: HttpClient) {
     RegisterPageComponent,
     LoginPageComponent,
     NotFoundPageComponent,
-    ProfileComponent
+    ProfileComponent,
+    ProfilesComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    BsTableModule,
+    HttpClientModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
