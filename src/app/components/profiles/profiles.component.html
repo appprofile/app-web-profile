@@ -1,10 +1,23 @@
 <div class="container-fluid">
   <h1>Basic Use</h1>
-  <es-ng-table [data]="data">
+  <es-ng-table class="thead-dark" [data]="data">
     <es-ng-table-col field="state" [checkbox]="true"></es-ng-table-col>
-    <es-ng-table-col title="ID" field="id"></es-ng-table-col>
-    <es-ng-table-col title="Name" field="name"></es-ng-table-col>
-    <es-ng-table-col title="Score" field="score"></es-ng-table-col>
-    <es-ng-table-col title="Description" field="description"></es-ng-table-col>
+    <es-ng-table-col title="#" field="id"></es-ng-table-col>
+    <es-ng-table-col title="Nombre" field="name"></es-ng-table-col>
+    <es-ng-table-col title="Opciones" field="id">
+      <ng-template #textTemplate let-row="row" let-value="value" let-index="index" let-formatter="formatter">
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary">Ver</button>
+          <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="sr-only">Acciones de Usuario</span>
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Una acción</a>
+            <a class="dropdown-item" href="#">Otra acción</a>
+            <a class="dropdown-item" href="#">ID: {{value}}</a>
+          </div>
+        </div>
+      </ng-template>
+    </es-ng-table-col>
   </es-ng-table>
 </div>
