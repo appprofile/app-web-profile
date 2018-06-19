@@ -2,7 +2,14 @@
   background-color: #eee;
   min-height: 38px;
 }
+.delete {
+    cursor: pointer;
+}
 
 .form-control.disabled.textarea {
   min-height: 86px;
+}
+
+.badged {
+    margin-left: 5px;
 }
