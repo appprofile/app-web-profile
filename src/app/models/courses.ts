@@ -1,17 +1,19 @@
 export class Courses {
-    public id: number;
-    public name: string;
+    public id: string;
+    public course: string;
     public institute: string;
-    public dateIni: string;
-    public dateEnd: string;
+    public from: string;
+    public to: string;
     public description: string;
+    // Not mappep
+    public index: number;
 
     public constructor() {
-        this.id = 0;
-        this.name = '';
+        this.id = '';
+        this.course = '';
         this.institute = '';
-        this.dateIni = '';
-        this.dateEnd = '';
+        this.from = '';
+        this.to = '';
         this.description = '';
     }
 }

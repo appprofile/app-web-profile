@@ -25,3 +25,14 @@ body {
 .alert.flash-message {
   margin-top: 15px;
 }
+
+/* table hacks */
+es-ng-table .row .col-md-8 > span {
+  display: none;
+}
+es-ng-table .row .col-md-8 > .d-inline-block:before {
+  content: 'Mostrar ';
+}
+es-ng-table .row .col-md-8 > .d-inline-block:after {
+  content: ' elementos.';
+}

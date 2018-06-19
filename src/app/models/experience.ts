@@ -7,7 +7,7 @@ export class Experience {
     public from: string;
     public to: string;
     public updated: string;
-    // Not mapped.
+    // Not mapped
     public index: number;
 
     public constructor() {
