@@ -7,12 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  public isLogged: boolean;
+  // public isLogged: boolean;
 
   constructor() { }
 
   ngOnInit() {
-    this.isLogged = false;
+    // this.isLogged = true;
   }
 
 }

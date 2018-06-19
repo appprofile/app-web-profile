@@ -1,8 +1,5 @@
-@media (min-width: 768px) {
-  .navbar-brand {
-    width: 200px;
-  }
-}
+$navbarHeight: 48px;
+$sidebarWidth: 200px;
 
 .navbar-brand {
   padding-top: .75rem;
@@ -10,6 +7,10 @@
   font-size: 1rem;
   background-color: rgba(0, 0, 0, .25);
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+  
+  @media (min-width: 768px) {
+    width: $sidebarWidth;
+  }
 }
 
 .navbar .form-control {
@@ -22,19 +23,11 @@
   color: #fff;
   background-color: rgba(255, 255, 255, .1);
   border-color: rgba(255, 255, 255, .1);
-}
-
-.form-control-dark:focus {
-  color: #495057;
-  background-color: #fff;
-  border-color: transparent;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
-}
-
-.form-control.disabled {
-  background-color: #eee;
-  min-height: 38px;
-}
-.form-control.disabled.textarea {
-  min-height: 86px;
+  
+  &:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: transparent;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+  }
 }
