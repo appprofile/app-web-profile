@@ -16,6 +16,10 @@ export class ProfileComponent implements OnInit {
   public jobs: Experience[] = [];
   public courses: Courses[] = [];
   public abilities = [];
+  public alertProp = {
+    success: { cssClass: 'alert-success', timeout: 4000 },
+    error: { cssClass: 'alert-danger', timeout: 4000 }
+  };
 
   public job: Experience;
   public course: Courses;
@@ -38,7 +42,6 @@ export class ProfileComponent implements OnInit {
   }
 
   private addSkill(skill: string) {
-
     const found = this.abilities.find(function (element) {
       return element === skill;
     });
@@ -47,29 +50,36 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  findExperience(id: string) {
+    const found = this.jobs.find(function (element, index) {
+      if ( element.id === id) {
+        element.index = index;
+        return true;
+      }
+    });
+
+    return found;
+  }
+
   onClickRegisterUserData() {
 
     if (this.user.id === '') {
       this.profileService.registerUserData(this.user).subscribe(
         (data) => {
-          this.flashMessagesService.show('Datos Registrados correctamente.',
-          {cssClass: 'alert-success', timeout : 4000});
-           this.user.id = data.id;
+          this.flashMessagesService.show('Datos Registrados correctamente.', this.alertProp.success);
+          this.user.id = data.id;
           this.edit.user = false;
         }, (error) => {
-          this.flashMessagesService.show(`Error registrando datos del usuario. ${error.error.error_message}`,
-          {cssClass: 'alert-danger', timeout : 4000});
+          this.flashMessagesService.show(`Error registrando datos del usuario. ${error.error.error_message}`, this.alertProp.error);
         }
       );
     } else {
       this.profileService.updateUserData(this.user.id, this.user).subscribe(
         (data) => {
-          this.flashMessagesService.show('Datos Editados correctamente.',
-          {cssClass: 'alert-success', timeout : 4000});
+          this.flashMessagesService.show('Datos Editados correctamente.', this.alertProp.success);
           this.edit.user = false;
         }, (error) => {
-          this.flashMessagesService.show(`Error editando datos del usuario. ${error.error.error_message}`,
-          {cssClass: 'alert-danger', timeout : 4000});
+          this.flashMessagesService.show(`Error editando datos del usuario. ${error.error.error_message}`, this.alertProp.error);
         }
       );
     }
@@ -80,9 +90,41 @@ export class ProfileComponent implements OnInit {
   }
 
   onClickAddJob() {
-    this.job.id = this.jobs.length;
-    this.jobs.push(this.job);
-    this.job = new Experience();
+    // verifco que haya datos de usuario
+    if (this.user.id !== '') {
+
+      this.job.from = new Date(this.job.from + ' 00:00:00').toISOString();
+      this.job.to = new Date(this.job.to + ' 00:00:00').toISOString();
+
+      if (this.job.id === '') {
+        this.profileService.registerUserExperience(this.user.id, this.job).subscribe(
+          (data) => {
+            this.flashMessagesService.show('Experiencia registrada correctamente.', this.alertProp.success);
+            this.job.id = data.id;
+            this.jobs.push(this.job);
+            this.job = new Experience();
+          }, (error) => {
+            this.flashMessagesService.show(`Error registrando datos de la experiencia. ${error.error.error_message}`, this.alertProp.error);
+          }
+        );
+
+      } else {
+        this.profileService.updateUserExperience(this.user.id, this.job.id, this.job).subscribe(
+          (data) => {
+            this.flashMessagesService.show('Experiencia registrada correctamente.', this.alertProp.success);
+            const tmp = this.findExperience(this.job.id);
+            if (tmp !== undefined) {
+              this.jobs[this.job.index] = this.job;
+            }
+            this.job = new Experience();
+          }, (error) => {
+            this.flashMessagesService.show(`Error registrando datos de la experiencia. ${error.error.error_message}`, this.alertProp.error);
+          }
+        );
+      }
+    } else {
+      this.flashMessagesService.show(`Error editando datos del usuario.`, this.alertProp.error);
+    }
   }
 
   onClickEditJob(index: number) {
@@ -93,8 +135,16 @@ export class ProfileComponent implements OnInit {
 
   onClickDeleteJob(index: number) {
     if (index >= 0) {
-      this.jobs.splice(index, 1);
-      this.job = new Experience();
+      const tmp = this.jobs[index];
+      this.profileService.deleteUserExperience(this.user.id, tmp.id).subscribe(
+        (data) => {
+          this.flashMessagesService.show('Experiencia eliminada correctamente.', this.alertProp.success);
+          this.jobs.splice(index, 1);
+          this.job = new Experience();
+        }, (error) => {
+          this.flashMessagesService.show(`Error eliminando datos de la experiencia. ${error.error.error_message}`, this.alertProp.error);
+        }
+      );
     }
   }
 
