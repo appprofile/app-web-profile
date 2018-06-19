@@ -18,6 +18,7 @@ export class ProfileComponent implements OnInit {
   public jobs: Experience[] = [];
   public courses: Courses[] = [];
   public abilities = [];
+  public storedToken: string;
   public alertProp = {
     success: { cssClass: 'alert-success', timeout: 4000 },
     error: { cssClass: 'alert-danger', timeout: 4000 }
@@ -37,14 +38,13 @@ export class ProfileComponent implements OnInit {
     public flashMessagesService: FlashMessagesService) { }
 
   ngOnInit() {
-    const storedToken: string = localStorage.getItem('user_id');
+    this.storedToken =  localStorage.getItem('user_id');
     this.user = new UserData();
     this.job = new Experience();
     this.course = new Courses();
     this.edit.user = true;
-    if (storedToken) {
-      this.user.id = storedToken;
-      this.fillObjects(storedToken);
+    if (this.storedToken) {
+       this.fillObjects(this.storedToken);
     }
 
   }
@@ -249,39 +249,7 @@ export class ProfileComponent implements OnInit {
   }
 
   fillObjects(userId: string) {
-    /*
-    "experiences": [
-        {
-            "id": "5b2956e46679d7003d5349de",
-            "title": "asdasd",
-            "company": "asdasd",
-            "from": "2018-05-27T04:00:00Z",
-            "to": "2018-06-11T04:00:00Z",
-            "description": "consume los mensajes de los clientes",
-            "created": "2018-06-19T19:17:56.946Z",
-            "updated": "2018-06-19T19:17:56.946Z"
-        },
-        {
-            "id": "5b295b126679d7003d5349df",
-            "title": "asdasd",
-            "company": "asd",
-            "from": "2018-06-11T04:00:00Z",
-            "to": "2018-06-28T04:00:00Z",
-            "description": "consume los mensajes de los clientes",
-            "created": "2018-06-19T19:35:46.03Z",
-            "updated": "2018-06-19T19:35:46.03Z"
-        }
-    ],
-    "educations": [],
-    "abilities": [
-        "sairio",
-        "antonio",
-        "pena",
-        "pulgar"
-    ],
-    "created": "0001-01-01T00:00:00Z",
-    "updated": "2018-06-19T19:16:36.404Z"*/
-    this.profileService.registerUserData(this.user).subscribe(
+    this.profileService.getUser(userId).subscribe(
       (data) => {
         this.user.id = data.id;
         this.user.name = data.name;
@@ -295,6 +263,10 @@ export class ProfileComponent implements OnInit {
 
         if (data.experiences.length > 0) {
           this.fillExperiences(data.experiences);
+        }
+
+        if (data.education.length > 0) {
+          this.fillCourses(data.education);
         }
       }, (error) => {
         this.flashMessagesService.show(`Error obteniendo datos del usuario. ${error.error.error_message}`, this.alertProp.error);

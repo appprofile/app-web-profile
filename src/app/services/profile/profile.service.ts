@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import 'rxjs/add/operator/map';
 /* Models. */
 import { Courses } from '@models/courses';
 import { Experience } from '@models/experience';
 import { UserData } from '@models/user-data';
 /* Services. */
 import { BaseService } from '@services/base/base.service';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ProfileService extends BaseService {
@@ -16,7 +16,9 @@ export class ProfileService extends BaseService {
     super(http);
   }
 
-
+  getUser(userId: string) {
+    return this.get(`profile/${userId}`, []);
+  }
   getUserData() {
     return this.get('profile', []);
   }
