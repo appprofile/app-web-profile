@@ -1,5 +1,5 @@
 export class UserData {
-
+    public id: number;
     public name: string;
     public email: string;
     public phone: string;
@@ -9,6 +9,7 @@ export class UserData {
      *
      */
     constructor() {
+        this.id = 0;
         this.name = '';
         this.email = '';
         this.phone = '';

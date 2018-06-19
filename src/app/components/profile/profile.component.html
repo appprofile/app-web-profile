@@ -6,13 +6,23 @@
 
     <h4 class="mt-5 mb-2">Información Personal</h4>
     <div class="border rounded m-0 p-0">
+      <div *ngIf="!edit.user" class="row no-gutters justify-content-end m-3">
+        <div class="col-auto">
+          <div class="btn-toolbar">
+            <button class="btn btn-sm btn-primary" type="button" (click)="onClickEditUserData()">
+              <i class="fa fa-edit"></i>
+            </button>
+          </div>
+        </div>
+      </div>
       <div class="row no-gutters m-3">
         <div class="col-sm-3 col-lg-2 pr-2 text-sm-right">
           <label for="name">Nombre Completo</label>
         </div>
         <div class="col-sm pl-2">
-          <input type="text" name="name" [(ngModel)]="user.name" class="form-control" placeholder="Nombre Completo" required autofocus
-          />
+          <input *ngIf="edit.user" type="text" name="name" [(ngModel)]="user.name" class="form-control" placeholder="Nombre Completo"
+            required autofocus />
+          <div *ngIf="!edit.user" class="form-control disabled">{{user.name}}</div>
         </div>
       </div>
       <div class="row no-gutters m-3">
@@ -20,7 +30,9 @@
           <label for="email">Email</label>
         </div>
         <div class="col-sm pl-2">
-          <input type="email" name="email" [(ngModel)]="user.email" class="form-control" placeholder="Email" required>
+          <input *ngIf="edit.user" type="email" name="email" [(ngModel)]="user.email" class="form-control" placeholder="Email" required
+          />
+          <div *ngIf="!edit.user" class="form-control disabled">{{user.email}}</div>
         </div>
       </div>
       <div class="row no-gutters m-3">
@@ -28,7 +40,9 @@
           <label for="telefono">Teléfono</label>
         </div>
         <div class="col-sm pl-2">
-          <input type="tel" name="telefono" class="form-control" [(ngModel)]="user.phone" placeholder="Teléfono" required>
+          <input *ngIf="edit.user" type="tel" name="telefono" class="form-control" [(ngModel)]="user.phone" placeholder="Teléfono"
+            required />
+          <div *ngIf="!edit.user" class="form-control disabled">{{user.phone}}</div>
         </div>
       </div>
       <div class="row no-gutters m-3">
@@ -36,7 +50,9 @@
           <label for="direccion">Dirección</label>
         </div>
         <div class="col-sm pl-2">
-          <textarea name="direccion" name="direccion" cols="30" rows="3" [(ngModel)]="user.address" class="form-control" placeholder="Dirección"></textarea>
+          <textarea *ngIf="edit.user" name="direccion" name="direccion" cols="30" rows="3" [(ngModel)]="user.address" class="form-control"
+            placeholder="Dirección"></textarea>
+          <div *ngIf="!edit.user" class="form-control textarea disabled">{{user.address}}</div>
         </div>
       </div>
       <div class="row no-gutters m-3">
@@ -44,11 +60,13 @@
           <label for="descripcion">Descripción</label>
         </div>
         <div class="col-sm pl-2">
-          <textarea name="descripcion" name="descripcion" [(ngModel)]="user.description" cols="30" rows="3" class="form-control" placeholder="Descripción"></textarea>
+          <textarea *ngIf="edit.user" name="descripcion" name="descripcion" [(ngModel)]="user.description" cols="30" rows="3" class="form-control"
+            placeholder="Descripción"></textarea>
+          <div *ngIf="!edit.user" class="form-control textarea disabled">{{user.description}}</div>
         </div>
       </div>
-      <div class="text-center m-3">
-        <button type="button" class="btn btn-success" (click)="onClickRegisterUserData(user)">
+      <div class="text-center m-3" *ngIf="edit.user">
+        <button type="button" class="btn btn-success" (click)="onClickRegisterUserData()">
           <i class="fa fa-save"></i> Guardar</button>
       </div>
     </div>
@@ -56,29 +74,31 @@
     <h4 class="mt-5 mb-2">Experiencia</h4>
     <div class="border rounded m-0 p-0">
       <div class="border-bottom p-3">
-        <ul class="list-group">
-          <!-- Experiencia de Ejemplo -->
-          <li class="list-group-item">
-            <!-- Barra de opciones -->
-            <div class="btn-toolbar">
-              <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-primary">
-                  <i class="fa fa-edit"></i>
-                </button>
-                <button type="button" class="btn btn-sm btn-danger">
-                  <i class="fa fa-trash"></i>
-                </button>
+        <div *ngIf="jobs.length > 0">
+          <ul class="list-group">
+            <!-- Experiencia de Ejemplo -->
+            <li class="list-group-item" *ngFor="let job of jobs; let i = index">
+              <!-- Barra de opciones -->
+              <div class="btn-toolbar float-right">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-primary" (click)="onClickEditJob(i)">
+                    <i class="fa fa-edit"></i>
+                  </button>
+                  <button type="button" class="btn btn-sm btn-danger" (click)="onClickDeleteJob(i)">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </div>
               </div>
-            </div>
-            <h2>Empresa</h2>
-            <h4>Título de Trabajo</h4>
-            <p>
-              <span>01/01/1990</span> -
-              <span>12/12/2000</span>
-            </p>
-            <p>Descripción</p>
-          </li>
-        </ul>
+              <h2>{{job.company}}</h2>
+              <h4>{{job.title}}</h4>
+              <p>
+                <span>{{job.dateIni}}</span> -
+                <span>{{job.dateEnd}}</span>
+              </p>
+              <p>{{job.description}}</p>
+            </li>
+          </ul>
+        </div>
       </div>
 
       <div class="row no-gutters m-3">
@@ -86,7 +106,7 @@
           <label for="titulo-trabajo">Título de Trabajo</label>
         </div>
         <div class="col-sm pl-2">
-          <input type="text" id="titulo-trabajo" class="form-control" placeholder="Título de Trabajo" required>
+          <input type="text" name="title" [(ngModel)]="job.title" class="form-control" placeholder="Título de Trabajo" required>
         </div>
       </div>
 
@@ -95,7 +115,7 @@
           <label for="empresa">Empresa</label>
         </div>
         <div class="col-sm pl-2">
-          <input type="text" id="empresa" class="form-control" placeholder="Empresa" required>
+          <input type="text" name="company" class="form-control" [(ngModel)]="job.company" placeholder="Empresa" required>
         </div>
       </div>
 
@@ -104,7 +124,7 @@
           <label for="fecha-inicio">Fecha Inicio</label>
         </div>
         <div class="col-sm pl-2">
-          <input type="date" id="fecha-inicio" class="form-control" placeholder="Fecha Inicio" required>
+          <input type="date" name="dateIni" class="form-control" [(ngModel)]="job.dateIni" placeholder="Fecha Inicio" required>
         </div>
       </div>
 
@@ -113,7 +133,7 @@
           <label for="fecha-fin">Fecha Final</label>
         </div>
         <div class="col-sm pl-2">
-          <input type="date" id="fecha-fin" class="form-control" placeholder="Fecha Final">
+          <input type="date" name="dateEnd" class="form-control" [(ngModel)]="job.dateEnd" placeholder="Fecha Final">
         </div>
       </div>
 
@@ -122,13 +142,13 @@
           <label for="descripcion">Descripción</label>
         </div>
         <div class="col-sm pl-2">
-          <input type="text" id="descripcion" class="form-control" placeholder="Descripción" required>
+          <input type="text" name="description" class="form-control" [(ngModel)]="job.description" placeholder="Descripción" required>
         </div>
       </div>
 
       <div class="text-center m-3">
-        <button type="button" class="btn btn-success">
-          <i class="fa fa-plus-square"></i> Añadir</button>
+        <button type="button" class="btn btn-success" (click)="onClickAddJob()">
+          <i class="fa fa-plus"></i> Añadir</button>
       </div>
     </div>
 
@@ -137,25 +157,25 @@
       <div class="border-bottom p-3">
         <ul class="list-group">
           <!-- Educación de Ejemplo -->
-          <li class="list-group-item">
+          <li class="list-group-item" *ngFor="let course of courses; let i = index">
             <!-- Barra de opciones -->
-            <div class="btn-toolbar">
+            <div class="btn-toolbar float-right">
               <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-primary">
+                <button type="button" class="btn btn-sm btn-primary" (click)="onClickEditCourse(i)">
                   <i class="fa fa-edit"></i>
                 </button>
-                <button type="button" class="btn btn-sm btn-danger">
+                <button type="button" class="btn btn-sm btn-danger" (click)="onClickDeleteCourse(i)">
                   <i class="fa fa-trash"></i>
                 </button>
               </div>
             </div>
-            <h2>Institución</h2>
-            <h4>Nombre del curso</h4>
+            <h2>{{course.institute}}</h2>
+            <h4>{{course.name}}</h4>
             <p>
-              <span>01/01/1990</span> -
-              <span>12/12/2000</span>
+              <span>{{course.dateIni}}</span> -
+              <span>{{course.dateEnd}}</span>
             </p>
-            <p>Descripción</p>
+            <p>{{course.description}}</p>
           </li>
         </ul>
       </div>
@@ -165,7 +185,7 @@
           <label for="nombre-curso">Nombre del curso</label>
         </div>
         <div class="col-sm pl-2">
-          <input type="text" id="nombre-curso" class="form-control" placeholder="Nombre del curso" required>
+          <input type="text" name="title" [(ngModel)]="course.name" class="form-control" placeholder="Nombre del curso" required>
         </div>
       </div>
 
@@ -174,7 +194,7 @@
           <label for="institucion">Institución</label>
         </div>
         <div class="col-sm pl-2">
-          <input type="text" id="institucion" class="form-control" placeholder="Institución" required>
+          <input type="text" name="institute" [(ngModel)]="course.institute" class="form-control" placeholder="Institución" required>
         </div>
       </div>
 
@@ -183,7 +203,7 @@
           <label for="fecha-inicio">Fecha Inicio</label>
         </div>
         <div class="col-sm pl-2">
-          <input type="date" id="fecha-inicio" class="form-control" placeholder="Fecha Inicio" required>
+          <input type="date" name="fecha-inicio"  [(ngModel)]="course.dateIni" class="form-control" placeholder="Fecha Inicio" required>
         </div>
       </div>
 
@@ -192,7 +212,7 @@
           <label for="fecha-fin">Fecha Final</label>
         </div>
         <div class="col-sm pl-2">
-          <input type="date" id="fecha-fin" class="form-control" placeholder="Fecha Final">
+          <input type="date" name="fecha-fin"  [(ngModel)]="course.dateEnd" class="form-control" placeholder="Fecha Final">
         </div>
       </div>
 
@@ -201,25 +221,23 @@
           <label for="descripcion">Descripción</label>
         </div>
         <div class="col-sm pl-2">
-          <input type="text" id="descripcion" class="form-control" placeholder="Descripción" required>
+          <input type="text" name="descripcion" [(ngModel)]="course.description" class="form-control" placeholder="Descripción" required>
         </div>
       </div>
 
       <div class="text-center m-3">
-        <button type="button" class="btn btn-success">
-          <i class="fa fa-plus-square"></i> Añadir</button>
+        <button type="button" class="btn btn-success" (click)="onClickAddCourse()">
+          <i class="fa fa-plus"></i> Añadir</button>
       </div>
     </div>
 
     <h4 class="mt-5 mb-2">Habilidades</h4>
     <div class="border rounded m-0 p-0">
       <div class="m-3">
-        <h4>
-          <span class="badge badge-pill badge-secondary font-weight-normal">Linux
-            <span role="button" aria-hidden="true">&times;</span>
-          </span>
-          <span class="badge badge-pill badge-secondary font-weight-normal">Go
-            <span role="button" aria-hidden="true">&times;</span>
+        <h4 *ngIf="skills.length > 0">
+          <span class="badge badge-pill badge-secondary font-weight-normal badged" *ngFor="let skill of skills; let i = index">
+            {{skill.name}}
+            <span aria-hidden="true" class="delete" (click)="onClickDeleteSkill(i)">&times;</span>
           </span>
         </h4>
       </div>
@@ -227,12 +245,12 @@
 
       <div class="row justify-content-center p-3">
         <div class="col-sm-11">
-          <input type="text" class="form-control" placeholder="Habilidad" name="habilidad[]">
+          <input type="text" class="form-control" [(ngModel)]="skill.name" (keydown)="onKeyDownAddSkill($event)" placeholder="Habilidad" name="habilidad">
         </div>
         <div class="w-100"></div>
         <div class="col text-center mt-3">
-          <button type="button" class="btn btn-success">
-            <i class="fa fa-plus-square"></i> Añadir</button>
+          <button type="button" class="btn btn-success" (click)="onClickAddSkill()">
+            <i class="fa fa-plus"></i> Añadir</button>
         </div>
       </div>
     </div>
