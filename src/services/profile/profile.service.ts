@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
-import { Experience } from '../../models/experience';
-import { UserData } from '../../models/user-data';
+import { Experience } from '@models/experience';
+import { UserData } from '@models/user-data';
 import { BaseService } from '../base/base.service';
 
 @Injectable()
@@ -13,6 +13,10 @@ export class ProfileService extends BaseService {
     super(http);
   }
 
+
+  getUserData() {
+    return this.get('profile', []);
+  }
 
   registerUserData(data: UserData) {
     return this.post('profile', data, []);

@@ -5,7 +5,7 @@
       "@node_modules/*": ["../node_modules/*"],
       "@environments/*": ["environments/*"],
       "@app/*": ["app/*"],
-      "@components/*": ["components/*"],
+      "@components/*": ["app/components/*"],
       "@guards/*": ["guards/*"],
       "@models/*": ["models/*"],
       "@pipes/*": ["pipes/*"],
