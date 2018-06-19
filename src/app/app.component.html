@@ -1,4 +1,4 @@
-<app-navbar *ngIf="isLogged"></app-navbar>
+<app-navbar [logged]="isLogged"></app-navbar>
 <app-sidebar *ngIf="isLogged"></app-sidebar>
 <div class="panel-content row no-gutters" [class.logged]="isLogged">
   <div class="col body">

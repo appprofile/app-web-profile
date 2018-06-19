@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.title = 'app';
-    this.isLogged = true;
+    this.isLogged = false;
   }
 
 }

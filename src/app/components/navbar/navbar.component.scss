@@ -12,6 +12,12 @@
   }
 }
 
+.navbar:not(.logged) .navbar-brand {
+  @media (min-width: 350px) {
+    width: $sidebarWidth;
+  }
+}
+
 .navbar .form-control {
   padding: .75rem 1rem;
   border-width: 0;
