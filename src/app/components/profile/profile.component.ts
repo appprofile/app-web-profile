@@ -317,6 +317,20 @@ export class ProfileComponent implements OnInit {
       this.jobs.push(obj);
     }
   }
-  private fillCourses() {}
+  private fillCourses(courses: any) {
+    for (let index = 0; index < courses.length; index++) {
+      const element = courses[index];
+      const obj = new Courses();
+      const d1 = new Date(element.from);
+      const d2 = new Date(element.to);
+      obj.id = element.id;
+      obj.course = element.course;
+      obj.institute = element.institute;
+      obj.from = `${d1.getFullYear()}-${d1.getDate()}-${d1.getDay()}`;
+      obj.to = `${d2.getFullYear()}-${d2.getDate()}-${d2.getDay()}`;
+      obj.description = element.description;
+      this.courses.push(obj);
+    }
+  }
 
 }
