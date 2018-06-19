@@ -10,7 +10,7 @@ export const environment = {
     domain: 'app-profile.auth0.com',
     clientid: 'lUnF8NKF9FBehcR3YcAxe4z0HQo3C2z3',
     audience: '',
-    callback: 'http://192.168.0.107:8080/callback',
+    callback: 'callback',
     scope: 'openid profile email'
   },
   api: {
