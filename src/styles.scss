@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  font-size: .875rem;
+}
+
+[role="button"] {
+  cursor:pointer
+}
+
+/*
+ * List Groups
+ */
+
+.list-group-item {
+  position: relative;
+  transition: all 0.5s ease;
+}
+
+.list-group-item .btn-toolbar {
+  float: right;
+}
