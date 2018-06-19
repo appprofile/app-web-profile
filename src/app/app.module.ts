@@ -26,6 +26,7 @@ import { ProfileViewPageComponent } from '@components/profile-view-page/profile-
 /* Guards. */
 import { ScopeGuard } from '@guards/auth0/scope.guard';
 import { LoginGuard } from '@guards/auth0/login.guard';
+import { LogoutGuard } from '@guards/auth0/logout.guard';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { LoginGuard } from '@guards/auth0/login.guard';
     ProfileService,
     FlashMessagesService,
     ScopeGuard,
-    LoginGuard
+    LoginGuard,
+    LogoutGuard
   ],
   bootstrap: [AppComponent]
 })

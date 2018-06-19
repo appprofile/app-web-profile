@@ -3,29 +3,24 @@
     <input class="form-control form-control-dark w-100 d-md-none" type="text" placeholder="Buscar" aria-label="Buscar">
 
     <div id="user" class="card border-0">
-      <img class="card-img-top" src="assets/user.svg" alt="Imagen de Usuario">
+      <img class="card-img-top" src="{{ userImg }}" alt="Imagen de Usuario">
       <div class="card-body p-1">
-        <h5 class="card-title text-center">Nombre</h5>
+        <p class="card-title text-center">{{ userEmail }}</p>
       </div>
     </div>
     <div class="border-bottom"></div>
 
     <ul class="nav flex-column">
       <li class="nav-item">
-        <a class="nav-link active" href="/">
-          <span data-feather="Inicio"></span>
-          Inicio
-          <span class="sr-only">(actual)</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/profile">
+        <a class="nav-link" routerLink="/profile" 
+          [ngClass]="{'active': router.url === '/profile'}">
           <span data-feather="opcion2"></span>
-          Mi Perfil
+          Perfil
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#" routerLink="/profiles">
+        <a class="nav-link" href="#" routerLink="/profiles"
+        [ngClass]="{'active': router.url === '/profiles'}">
           <span data-feather="opcion3"></span>
           Perfiles
         </a>

@@ -10,9 +10,10 @@ import { CallbackPageComponent } from '@components/callback-page/callback-page.c
 /* Guards. */
 import { LoginGuard } from '@guards/auth0/login.guard';
 import { ScopeGuard } from '@guards/auth0/scope.guard';
+import { LogoutGuard } from '@guards/auth0/logout.guard';
 
 const routes: Routes = [
-  { path: '', component: HomePageComponent },
+  { path: '', component: HomePageComponent, canActivate: [LogoutGuard] },
   { path: 'callback', component: CallbackPageComponent, canActivate: [LoginGuard] },
   {
     path: 'profile', component: ProfileComponent, canActivate: [ScopeGuard],
