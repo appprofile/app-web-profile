@@ -6,7 +6,8 @@
   <input class="form-control form-control-dark w-100 d-none d-md-block" type="text" placeholder="Buscar" aria-label="Buscar">
   <ul class="navbar-nav px-3 d-none d-md-block">
     <li class="nav-item text-nowrap">
-      <a class="nav-link" href="#">Cerrar Sesión</a>
+      <a *ngIf="!auth0Service.isAuthenticated()"  (click)="auth0Service.login()" class="nav-link">Iniciar Sesión</a>
+      <a *ngIf="auth0Service.isAuthenticated()" (click)="auth0Service.logout()" class="nav-link">Cerrar Sesión</a>
     </li>
   </ul>
 </nav>

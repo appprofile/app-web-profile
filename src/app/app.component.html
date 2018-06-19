@@ -1,6 +1,6 @@
-<app-navbar *ngIf="isLogged"></app-navbar>
-<app-sidebar *ngIf="isLogged"></app-sidebar>
-<div class="panel-content row no-gutters" [class.logged]="isLogged">
+<app-navbar></app-navbar>
+<app-sidebar *ngIf="auth0Service.isAuthenticated()"></app-sidebar>
+<div class="panel-content row no-gutters" [class.logged]="auth0Service.isAuthenticated()">
   <div class="col body">
     <router-outlet></router-outlet>
   </div>

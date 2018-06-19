@@ -5,11 +5,11 @@
       "@node_modules/*": ["../node_modules/*"],
       "@environments/*": ["environments/*"],
       "@app/*": ["app/*"],
-      "@components/*": ["components/*"],
-      "@guards/*": ["guards/*"],
-      "@models/*": ["models/*"],
-      "@pipes/*": ["pipes/*"],
-      "@services/*": ["services/*"]
+      "@components/*": ["app/components/*"],
+      "@guards/*": ["app/guards/*"],
+      "@models/*": ["app/models/*"],
+      "@pipes/*": ["app/pipes/*"],
+      "@services/*": ["app/services/*"]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,

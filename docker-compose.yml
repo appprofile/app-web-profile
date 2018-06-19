@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  app-web-profile:
+    image: app-web-profile
+    environment:
+      - PUBLIC_HOST=appwebprofile.localtunnel.me
+      - AUTH0_DOMAIN=app-profile.auth0.com
+      - AUTH0_CLIENT_ID=lUnF8NKF9FBehcR3YcAxe4z0HQo3C2z3
+      - CALLBACK=callback
+      - SCOPE=openid profile email
+      - API_DOMAIN=https://de3c6101.ngrok.io
+      - API_PORT=
+      - API_VERSION=v1
+    ports:
+      - 8080:8080
