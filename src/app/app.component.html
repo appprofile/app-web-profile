@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <app-sidebar></app-sidebar>
-<div class="panel-content row no-gutters">
+<div class="panel-content row no-gutters" [class.logged]="isLogged">
   <div class="col body">
     <router-outlet></router-outlet>
   </div>

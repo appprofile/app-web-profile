@@ -1,9 +1,9 @@
-.panel-content {
+.panel-content.logged {
   margin-top: 48px; /* Height of navbar */
 }
 
 @media (min-width: 768px) {
-  .body {
+  .panel-content.logged > .body {
     margin-left: 200px;
   }
 }
