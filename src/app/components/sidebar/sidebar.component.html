@@ -1,6 +1,14 @@
-<nav class="col-md-2 sidebar navbar-expand-md" *ngIf="isLogin">
+<nav class="col-md-2 sidebar navbar-expand-md" *ngIf="isLogged">
   <div class="sidebar-sticky navbar-collapse collapse" id="navbarSupportedContent">
     <input class="form-control form-control-dark w-100 d-md-none" type="text" placeholder="Buscar" aria-label="Buscar">
+
+    <div id="user" class="card border-0">
+      <img class="card-img-top" src="assets/user.svg" alt="Imagen de Usuario">
+      <div class="card-body p-1">
+        <h5 class="card-title text-center">Nombre</h5>
+      </div>
+    </div>
+    <div class="border-bottom"></div>
 
     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
       <span>Menú 1</span>
