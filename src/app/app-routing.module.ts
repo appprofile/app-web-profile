@@ -5,6 +5,7 @@ import { environment } from '@environments/environment';
 import { HomePageComponent } from '@components/home-page/home-page.component';
 import { NotFoundPageComponent } from '@components/not-found-page/not-found-page.component';
 import { ProfileComponent } from '@components/profile/profile.component';
+import { ProfileViewComponent } from '@components/profile-view/profile-view.component';
 import { ProfilesComponent } from '@components/profiles/profiles.component';
 import { CallbackPageComponent } from '@components/callback-page/callback-page.component';
 /* Guards. */
@@ -17,6 +18,10 @@ const routes: Routes = [
   { path: 'callback', component: CallbackPageComponent, canActivate: [LoginGuard] },
   {
     path: 'profile', component: ProfileComponent, canActivate: [ScopeGuard],
+    data: { expectedScopes: environment.auth0.scope.split(' ') }
+  },
+  {
+    path: 'profile/:id', component: ProfileViewComponent, canActivate: [ScopeGuard],
     data: { expectedScopes: environment.auth0.scope.split(' ') }
   },
   {

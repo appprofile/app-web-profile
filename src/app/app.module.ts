@@ -22,7 +22,7 @@ import { SidebarComponent } from '@components/sidebar/sidebar.component';
 import { ProfileComponent } from '@components/profile/profile.component';
 import { ProfilesComponent } from '@components/profiles/profiles.component';
 import { CallbackPageComponent } from '@components/callback-page/callback-page.component';
-import { ProfileViewPageComponent } from '@components/profile-view-page/profile-view-page.component';
+import { ProfileViewComponent } from '@components/profile-view/profile-view.component';
 /* Guards. */
 import { ScopeGuard } from '@guards/auth0/scope.guard';
 import { LoginGuard } from '@guards/auth0/login.guard';
@@ -38,7 +38,7 @@ import { LogoutGuard } from '@guards/auth0/logout.guard';
     ProfileComponent,
     ProfilesComponent,
     CallbackPageComponent,
-    ProfileViewPageComponent
+    ProfileViewComponent
   ],
   imports: [
     BrowserModule,

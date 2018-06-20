@@ -14,11 +14,11 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 })
 export class ProfileComponent implements OnInit {
 
-  public user: UserData;
+  public profileID: string;
+  public profile: UserData;
   public jobs: Experience[] = [];
   public courses: Courses[] = [];
   public abilities = [];
-  public storedToken: string;
   public alertProp = {
     success: { cssClass: 'alert-success', timeout: 4000 },
     error: { cssClass: 'alert-danger', timeout: 4000 }
@@ -29,7 +29,7 @@ export class ProfileComponent implements OnInit {
   public abilitie;
 
   public edit = {
-    user: true,
+    profile: true,
     jobs: true,
     courses: true
   };
@@ -38,15 +38,20 @@ export class ProfileComponent implements OnInit {
     public flashMessagesService: FlashMessagesService) { }
 
   ngOnInit() {
-    this.storedToken =  localStorage.getItem('user_id');
-    this.user = new UserData();
-    this.job = new Experience();
-    this.course = new Courses();
-    this.edit.user = true;
-    if (this.storedToken) {
-       this.fillObjects(this.storedToken);
+    this.profile = new UserData();
+    // User information.
+    this.profileID = localStorage.getItem('user_id');
+    // Get profile information.
+    if (this.profileID) {
+      this.fillObjects(this.profileID);
     }
 
+    // Experiences.
+    this.job = new Experience();
+    this.course = new Courses();
+
+    // Enable edition.
+    this.edit.profile = true;
   }
 
   private addSkill(skill: string) {
@@ -80,24 +85,35 @@ export class ProfileComponent implements OnInit {
 
   onClickRegisterUserData() {
 
-    if (this.user.id === '') {
-      if (this.abilities.length > 0) {
-        this.user.abilities = this.abilities;
-      }
-      this.profileService.registerUserData(this.user).subscribe(
+    if (this.jobs && this.jobs.length > 0) {
+      this.profile.experiences = this.jobs;
+    }
+    if (this.courses && this.courses.length > 0) {
+      this.profile.educations = this.courses;
+    }
+    if (this.abilities && this.abilities.length > 0) {
+      this.profile.abilities = this.abilities;
+    }
+
+    if (this.profile.id === '') {
+      // Setup profile ID.
+      this.profile.id = this.profileID;
+
+      this.profileService.registerUserData(this.profile).subscribe(
         (data) => {
           this.flashMessagesService.show('Datos Registrados correctamente.', this.alertProp.success);
-          this.user.id = data.id;
-          this.edit.user = false;
+          this.edit.profile = false;
         }, (error) => {
           this.flashMessagesService.show(`Error registrando datos del usuario. ${error.error.error_message}`, this.alertProp.error);
+          // Restore the domain object.
+          this.profile.id = '';
         }
       );
     } else {
-      this.profileService.updateUserData(this.user.id, this.user).subscribe(
+      this.profileService.updateUserData(this.profile.id, this.profile).subscribe(
         (data) => {
           this.flashMessagesService.show('Datos Editados correctamente.', this.alertProp.success);
-          this.edit.user = false;
+          this.edit.profile = false;
         }, (error) => {
           this.flashMessagesService.show(`Error editando datos del usuario. ${error.error.error_message}`, this.alertProp.error);
         }
@@ -106,18 +122,18 @@ export class ProfileComponent implements OnInit {
   }
 
   onClickEditUserData() {
-    this.edit.user = true;
+    this.edit.profile = true;
   }
 
   onClickAddJob() {
     // verifco que haya datos de usuario
-    if (this.user.id !== '') {
+    if (this.profile.id !== '') {
 
       this.job.from = new Date(this.job.from + ' 00:00:00').toISOString();
       this.job.to = new Date(this.job.to + ' 00:00:00').toISOString();
 
       if (this.job.id === '') {
-        this.profileService.registerUserExperience(this.user.id, this.job).subscribe(
+        this.profileService.registerUserExperience(this.profile.id, this.job).subscribe(
           (data) => {
             this.flashMessagesService.show('Experiencia registrada correctamente.', this.alertProp.success);
             this.job.id = data.id;
@@ -129,7 +145,7 @@ export class ProfileComponent implements OnInit {
         );
 
       } else {
-        this.profileService.updateUserExperience(this.user.id, this.job.id, this.job).subscribe(
+        this.profileService.updateUserExperience(this.profile.id, this.job.id, this.job).subscribe(
           (data) => {
             this.flashMessagesService.show('Experiencia registrada correctamente.', this.alertProp.success);
             const tmp = this.findExperience(this.job.id);
@@ -156,7 +172,7 @@ export class ProfileComponent implements OnInit {
   onClickDeleteJob(index: number) {
     if (index >= 0) {
       const tmp = this.jobs[index];
-      this.profileService.deleteUserExperience(this.user.id, tmp.id).subscribe(
+      this.profileService.deleteUserExperience(this.profile.id, tmp.id).subscribe(
         (data) => {
           this.flashMessagesService.show('Experiencia eliminada correctamente.', this.alertProp.success);
           this.jobs.splice(index, 1);
@@ -169,13 +185,13 @@ export class ProfileComponent implements OnInit {
   }
 
   onClickAddCourse() {
-    if (this.user.id !== '') {
+    if (this.profile.id !== '') {
 
       this.course.from = new Date(this.course.from + ' 00:00:00').toISOString();
       this.course.to = new Date(this.course.to + ' 00:00:00').toISOString();
 
       if (this.course.id === '') {
-        this.profileService.registerUserEducation(this.user.id, this.course).subscribe(
+        this.profileService.registerUserEducation(this.profile.id, this.course).subscribe(
           (data) => {
             this.flashMessagesService.show('Educacion registrada correctamente.', this.alertProp.success);
             this.course.id = data.id;
@@ -187,7 +203,7 @@ export class ProfileComponent implements OnInit {
         );
 
       } else {
-        this.profileService.updateUserEducation(this.user.id, this.course.id, this.course).subscribe(
+        this.profileService.updateUserEducation(this.profile.id, this.course.id, this.course).subscribe(
           (data) => {
             this.flashMessagesService.show('Educacion registrada correctamente.', this.alertProp.success);
             const tmp = this.findCourse(this.course.id);
@@ -214,7 +230,7 @@ export class ProfileComponent implements OnInit {
   onClickDeleteCourse(index: number) {
     if (index >= 0) {
       const tmp = this.courses[index];
-      this.profileService.deleteUserEducation(this.user.id, tmp.id).subscribe(
+      this.profileService.deleteUserEducation(this.profile.id, tmp.id).subscribe(
         (data) => {
           this.flashMessagesService.show('Educacion eliminada correctamente.', this.alertProp.success);
           this.courses.splice(index, 1);
@@ -227,7 +243,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onClickAddSkill() {
-    if (this.user.id !== '') {
+    if (this.profile.id !== '') {
       this.onClickRegisterUserData();
     }
   }
@@ -248,28 +264,31 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  fillObjects(userId: string) {
-    this.profileService.getUser(userId).subscribe(
+  fillObjects(profileID: string) {
+    this.profileService.getUser(profileID).subscribe(
       (data) => {
-        this.user.id = data.id;
-        this.user.name = data.name;
-        this.user.address = data.address;
-        this.user.phone = data.phone;
-        this.user.description = (data.description !== undefined) ? data.description : '';
-        this.user.email = (data.email !== undefined) ? data.email : '';
+        this.profile.id = data.id;
+        this.profile.name = data.name;
+        this.profile.address = data.address;
+        this.profile.phone = data.phone;
+        this.profile.description = (data.description !== undefined) ? data.description : '';
+        this.profile.email = (data.email !== undefined) ? data.email : '';
         if (data.abilities.length > 0) {
           this.abilities = data.abilities;
         }
 
-        if (data.experiences.length > 0) {
+        if (data.experiences && data.experiences.length > 0) {
           this.fillExperiences(data.experiences);
         }
 
-        if (data.education.length > 0) {
-          this.fillCourses(data.education);
+        if (data.educations && data.educations.length > 0) {
+          this.fillCourses(data.educations);
         }
+
+        // Disble edition.
+        this.edit.profile = false;
       }, (error) => {
-        this.flashMessagesService.show(`Error obteniendo datos del usuario. ${error.error.error_message}`, this.alertProp.error);
+        /* this.flashMessagesService.show(`Error obteniendo datos del usuario. ${error.error.error_message}`, this.alertProp.error); */
       }
     );
   }
@@ -278,13 +297,11 @@ export class ProfileComponent implements OnInit {
     for (let index = 0; index < experiences.length; index++) {
       const element = experiences[index];
       const obj = new Experience();
-      const d1 = new Date(element.from);
-      const d2 = new Date(element.to);
       obj.id = element.id;
       obj.title = element.title;
       obj.company = element.company;
-      obj.from = `${d1.getFullYear()}-${d1.getDate()}-${d1.getDay()}`;
-      obj.to = `${d2.getFullYear()}-${d2.getDate()}-${d2.getDay()}`;
+      obj.from = new Date(element.from).toISOString();
+      obj.to = new Date(element.to).toISOString();
       obj.description = element.description;
       this.jobs.push(obj);
     }
@@ -293,13 +310,11 @@ export class ProfileComponent implements OnInit {
     for (let index = 0; index < courses.length; index++) {
       const element = courses[index];
       const obj = new Courses();
-      const d1 = new Date(element.from);
-      const d2 = new Date(element.to);
       obj.id = element.id;
       obj.course = element.course;
       obj.institute = element.institute;
-      obj.from = `${d1.getFullYear()}-${d1.getDate()}-${d1.getDay()}`;
-      obj.to = `${d2.getFullYear()}-${d2.getDate()}-${d2.getDay()}`;
+      obj.from = new Date(element.from).toISOString();
+      obj.to = new Date(element.to).toISOString();
       obj.description = element.description;
       this.courses.push(obj);
     }
