@@ -12,7 +12,7 @@ export class ProfilesComponent implements OnInit {
 
   /* Attributes. */
   public errorProps;
-  public profiles;  
+  public profiles: any[] = [];
   public total;
 
   constructor(public profileService: ProfileService,

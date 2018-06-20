@@ -5,6 +5,7 @@ export class Courses {
     public from: string;
     public to: string;
     public description: string;
+    public current: boolean;
     // Not mappep
     public index: number;
 

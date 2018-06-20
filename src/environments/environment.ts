@@ -14,8 +14,8 @@ export const environment = {
     scope: 'openid profile email'
   },
   api: {
-    domain: '7de05714.ngrok.io',
-    port: '',
+    domain: '25.85.82.83',
+    port: '8081',
     version: 'v1'
   }
 };

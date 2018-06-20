@@ -9,7 +9,7 @@ export class BaseService {
     protected urlbase: string;
 
     constructor(protected http: HttpClient) {
-        this.urlbase = `https://${environment.api.domain}/${environment.api.version}/`;
+        this.urlbase = `http://${environment.api.domain}:${environment.api.port}/${environment.api.version}/`;
     }
 
     protected post(url: string, model: any, options: any): Observable<any> {
@@ -33,5 +33,4 @@ export class BaseService {
         options['withCredentials'] = true;
         return this.http.delete(`${this.urlbase}${url}`, options);
     }
-
 }

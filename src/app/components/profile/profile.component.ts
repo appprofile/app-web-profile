@@ -39,6 +39,8 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.profile = new UserData();
+    this.job = new Experience();
+    this.course = new Courses();
     // User information.
     this.profileID = localStorage.getItem('user_id');
     // Get profile information.
@@ -129,8 +131,16 @@ export class ProfileComponent implements OnInit {
     // verifco que haya datos de usuario
     if (this.profile.id !== '') {
 
-      this.job.from = new Date(this.job.from + ' 00:00:00').toISOString();
-      this.job.to = new Date(this.job.to + ' 00:00:00').toISOString();
+      if (this.job.from && this.job.from.length > 0) {
+        this.job.from = new Date(this.job.from + ' 00:00:00').toISOString();
+      } else {
+        this.job.from = undefined;
+      }
+      if (this.job.to && this.job.to.length > 0) {
+        this.job.to = new Date(this.job.to + ' 00:00:00').toISOString();
+      } else {
+        this.job.to = undefined;
+      }
 
       if (this.job.id === '') {
         this.profileService.registerUserExperience(this.profile.id, this.job).subscribe(
@@ -165,7 +175,22 @@ export class ProfileComponent implements OnInit {
 
   onClickEditJob(index: number) {
     if (index >= 0) {
-      this.job = this.jobs[index];
+      const tmp = this.jobs[index];
+      this.job = new Experience();
+
+      this.job.id = tmp.id;
+      this.job.title = tmp.title;
+      this.job.company = tmp.company;
+      this.job.description = tmp.description;
+      this.job.created = tmp.created;
+      this.job.from = tmp.from;
+      this.job.to = tmp.to;
+      this.job.current = tmp.current;
+      this.job.updated = tmp.updated;
+      this.job.index = index;
+
+      this.job.from = !this.job.from ? '' : this.job.from.substring(0, 10);
+      this.job.to = !this.job.to ? '' : this.job.to.substring(0, 10);
     }
   }
 
@@ -184,11 +209,23 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  onClickCancelJob() {
+    this.job = new Experience();
+  }
+
   onClickAddCourse() {
     if (this.profile.id !== '') {
 
-      this.course.from = new Date(this.course.from + ' 00:00:00').toISOString();
-      this.course.to = new Date(this.course.to + ' 00:00:00').toISOString();
+      if (this.course.from && this.course.from.length > 0) {
+        this.course.from = new Date(this.course.from + ' 00:00:00').toISOString();
+      } else {
+        this.course.from = undefined;
+      }
+      if (this.course.to && this.course.to.length > 0) {
+        this.course.to = new Date(this.course.to + ' 00:00:00').toISOString();
+      } else {
+        this.course.to = undefined;
+      }
 
       if (this.course.id === '') {
         this.profileService.registerUserEducation(this.profile.id, this.course).subscribe(
@@ -223,7 +260,19 @@ export class ProfileComponent implements OnInit {
 
   onClickEditCourse(index: number) {
     if (index >= 0) {
-      this.course = this.courses[index];
+      const tmp = this.courses[index];
+      this.job = new Experience();
+
+      this.course.id = tmp.id;
+      this.course.course = tmp.course;
+      this.course.institute = tmp.institute;
+      this.course.from = tmp.from;
+      this.course.to = tmp.to;
+      this.course.current = tmp.current;
+      this.course.index = index;
+
+      this.course.from = !this.course.from ? '' : this.course.from.substring(0, 10);
+      this.course.to = !this.course.to ? '' : this.course.to.substring(0, 10);
     }
   }
 
@@ -240,6 +289,10 @@ export class ProfileComponent implements OnInit {
         }
       );
     }
+  }
+
+  onClickCancelCourse() {
+    this.course = new Courses();
   }
 
   onClickAddSkill() {
@@ -301,7 +354,11 @@ export class ProfileComponent implements OnInit {
       obj.title = element.title;
       obj.company = element.company;
       obj.from = new Date(element.from).toISOString();
-      obj.to = new Date(element.to).toISOString();
+      obj.current = element.current;
+      obj.to = new Date().toISOString();
+      if (!obj.current) {
+        obj.to = new Date(element.to).toISOString();
+      }
       obj.description = element.description;
       this.jobs.push(obj);
     }
@@ -314,7 +371,11 @@ export class ProfileComponent implements OnInit {
       obj.course = element.course;
       obj.institute = element.institute;
       obj.from = new Date(element.from).toISOString();
-      obj.to = new Date(element.to).toISOString();
+      obj.current = element.current;
+      obj.to = new Date().toISOString();
+      if (!obj.current) {
+        obj.to = new Date(element.to).toISOString();
+      }
       obj.description = element.description;
       this.courses.push(obj);
     }

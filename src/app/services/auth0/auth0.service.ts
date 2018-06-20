@@ -14,7 +14,7 @@ export class Auth0Service {
     domain: environment.auth0.domain,
     responseType: 'token id_token',
     audience: environment.auth0.audience,
-    redirectUri: `https://${environment.publichost}/${environment.auth0.callback}`,
+    redirectUri: `http://${environment.publichost}/${environment.auth0.callback}`,
     scope: environment.auth0.scope
   });
 

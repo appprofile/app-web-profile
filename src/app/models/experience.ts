@@ -6,6 +6,7 @@ export class Experience {
     public created: string;
     public from: string;
     public to: string;
+    public current: boolean;
     public updated: string;
     // Not mapped
     public index: number;

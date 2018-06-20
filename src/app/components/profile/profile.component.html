@@ -28,8 +28,8 @@
           <label for="email">Email</label>
         </div>
         <div class="col-sm pl-2">
-          <input *ngIf="edit.profile" type="email" name="email" [(ngModel)]="profile.email" class="form-control" placeholder="Email" required
-          />
+          <input *ngIf="edit.profile" type="email" name="email" [(ngModel)]="profile.email" class="form-control" placeholder="Email"
+            required />
           <div *ngIf="!edit.profile" class="form-control disabled">{{profile.email}}</div>
         </div>
       </div>
@@ -58,14 +58,15 @@
           <label for="descripcion">Descripción</label>
         </div>
         <div class="col-sm pl-2">
-          <textarea *ngIf="edit.profile" name="descripcion" name="descripcion" [(ngModel)]="profile.description" cols="30" rows="3" class="form-control"
-            placeholder="Descripción"></textarea>
+          <textarea *ngIf="edit.profile" name="descripcion" name="descripcion" [(ngModel)]="profile.description" cols="30" rows="3"
+            class="form-control" placeholder="Descripción"></textarea>
           <div *ngIf="!edit.profile" class="form-control textarea disabled">{{profile.description}}</div>
         </div>
       </div>
       <div class="text-center m-3" *ngIf="edit.profile">
         <button type="button" class="btn btn-success" (click)="onClickRegisterUserData()">
-          <i class="fa fa-save"></i> Guardar</button>
+          Guardar
+        </button>
       </div>
     </div>
 
@@ -74,9 +75,7 @@
       <div class="border-bottom p-3">
         <div *ngIf="jobs && jobs.length > 0">
           <ul class="list-group">
-            <!-- Experiencia de Ejemplo -->
             <li class="list-group-item" *ngFor="let job of jobs; let i = index">
-              <!-- Barra de opciones -->
               <div class="btn-toolbar float-right">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-primary" (click)="onClickEditJob(i)">
@@ -91,7 +90,8 @@
               <h4>{{job.title}}</h4>
               <p>
                 <span>{{job.from | date: 'mediumDate'}}</span> -
-                <span>{{job.to | date: 'mediumDate'}}</span>
+                <span *ngIf="!job.current">{{job.to | date: 'mediumDate'}}</span>
+                <span *ngIf="job.current">Actualmente</span>
               </p>
               <p>{{job.description}}</p>
             </li>
@@ -128,6 +128,18 @@
 
       <div class="row no-gutters m-3">
         <div class="col-sm-3 col-lg-2 pr-2 text-sm-right">
+        </div>
+        <div class="col-sm pl-2">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="checkbox" name="jobCurrent" class="form-check-input" [(ngModel)]="job.current"> Trabajo aquí actualmente
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!job.current" class="row no-gutters m-3">
+        <div class="col-sm-3 col-lg-2 pr-2 text-sm-right">
           <label for="fecha-fin">Fecha Final</label>
         </div>
         <div class="col-sm pl-2">
@@ -146,7 +158,11 @@
 
       <div class="text-center m-3">
         <button type="button" class="btn btn-success" (click)="onClickAddJob()">
-          <i class="fa fa-plus"></i> Añadir</button>
+          Guardar
+        </button>
+        <button type="button" class="btn" (click)="onClickCancelJob()">
+          Cancelar
+        </button>
       </div>
     </div>
 
@@ -154,9 +170,7 @@
     <div class="border rounded m-0 p-0">
       <div class="border-bottom p-3">
         <ul class="list-group">
-          <!-- Educación de Ejemplo -->
           <li class="list-group-item" *ngFor="let course of courses; let i = index">
-            <!-- Barra de opciones -->
             <div class="btn-toolbar float-right">
               <div class="btn-group">
                 <button type="button" class="btn btn-sm btn-primary" (click)="onClickEditCourse(i)">
@@ -171,7 +185,8 @@
             <h4>{{course.course}}</h4>
             <p>
               <span>{{course.from | date: 'mediumDate'}}</span> -
-              <span>{{course.to | date: 'mediumDate'}}</span>
+              <span *ngIf="!course.current">{{course.to | date: 'mediumDate'}}</span>
+              <span *ngIf="course.current">Actualmente</span>
             </p>
             <p>{{course.description}}</p>
           </li>
@@ -183,7 +198,8 @@
           <label for="nombre-curso">Nombre del curso</label>
         </div>
         <div class="col-sm pl-2">
-          <input type="text" name="educationTitle" [(ngModel)]="course.course" class="form-control" placeholder="Nombre del curso" required>
+          <input type="text" name="educationTitle" [(ngModel)]="course.course" class="form-control" placeholder="Nombre del curso"
+            required>
         </div>
       </div>
 
@@ -201,11 +217,24 @@
           <label for="fecha-inicio">Fecha Inicio</label>
         </div>
         <div class="col-sm pl-2">
-          <input type="date" name="fecha-inicio" [(ngModel)]="course.from" class="form-control" placeholder="Fecha Inicio" required />
+          <input type="date" name="fecha-inicio" [(ngModel)]="course.from" class="form-control" placeholder="Fecha Inicio" required
+          />
         </div>
       </div>
 
       <div class="row no-gutters m-3">
+        <div class="col-sm-3 col-lg-2 pr-2 text-sm-right">
+        </div>
+        <div class="col-sm pl-2">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="checkbox" name="courseCurrent" class="form-check-input" [(ngModel)]="course.current"> Estoy cursando actualmente
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!course.current" class="row no-gutters m-3">
         <div class="col-sm-3 col-lg-2 pr-2 text-sm-right">
           <label for="fecha-fin">Fecha Final</label>
         </div>
@@ -219,13 +248,18 @@
           <label for="descripcion">Descripción</label>
         </div>
         <div class="col-sm pl-2">
-          <input type="text" name="descripcion" [(ngModel)]="course.description" class="form-control" placeholder="Descripción" required />
+          <input type="text" name="descripcion" [(ngModel)]="course.description" class="form-control" placeholder="Descripción" required
+          />
         </div>
       </div>
 
       <div class="text-center m-3">
         <button type="button" class="btn btn-success" (click)="onClickAddCourse()">
-          <i class="fa fa-plus"></i> Añadir</button>
+          Guardar
+        </button>
+        <button type="button" class="btn" (click)="onClickCancelCourse()">
+          Cancelar
+        </button>
       </div>
     </div>
 
@@ -243,12 +277,13 @@
 
       <div class="row justify-content-center p-3">
         <div class="col-sm-11">
-          <input type="text" class="form-control" [(ngModel)]="abilitie" (keydown)="onKeyDownAddSkill($event)" placeholder="Habilidad" name="habilidad">
+          <input type="text" class="form-control" [(ngModel)]="abilitie" (keydown)="onKeyDownAddSkill($event)" placeholder="Habilidad"
+            name="habilidad">
         </div>
         <div class="w-100"></div>
         <div class="col text-center mt-3">
           <button type="button" class="btn btn-success" (click)="onClickAddSkill()">
-            <i class="fa fa-plus"></i> Guardar</button>
+            Guardar</button>
         </div>
       </div>
     </div>

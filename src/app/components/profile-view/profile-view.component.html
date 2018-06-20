@@ -64,7 +64,8 @@
                 <h4>{{experience.title}}</h4>
                 <p>
                   <span>{{experience.from | date: 'mediumDate'}}</span> -
-                  <span>{{experience.to | date: 'mediumDate'}}</span>
+                  <span *ngIf="!experience.current" >{{experience.to | date: 'mediumDate'}}</span>
+                  <span *ngIf="experience.current" >Actualmente</span>
                 </p>
                 <p>{{experience.description}}</p>
               </li>
@@ -83,11 +84,12 @@
           <div>
             <ul class="list-group">
               <li class="list-group-item" *ngFor="let education of profile.educations; let i = index">
-                <h2>{{education.company}}</h2>
-                <h4>{{education.title}}</h4>
+                <h2>{{education.institute}}</h2>
+                <h4>{{education.course}}</h4>
                 <p>
                   <span>{{education.from | date: 'mediumDate'}}</span> -
-                  <span>{{education.to | date: 'mediumDate'}}</span>
+                  <span *ngIf="!education.current">{{education.to | date: 'mediumDate'}}</span>
+                  <span *ngIf="education.current" >Actualmente</span>
                 </p>
                 <p>{{education.description}}</p>
               </li>
