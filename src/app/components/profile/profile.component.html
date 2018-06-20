@@ -1,10 +1,10 @@
-<main class="p-4">
-  
+<main class="p-4 container">
+  <h1 class="my-3">Perfil Profesional</h1>
   <form action="">
 
     <h4 class="mt-5 mb-2">Información Personal</h4>
     <div class="border rounded m-0 p-0">
-      <div *ngIf="!edit.user" class="row no-gutters justify-content-end m-3">
+      <div *ngIf="!edit.profile" class="row no-gutters justify-content-end m-3">
         <div class="col-auto">
           <div class="btn-toolbar">
             <button class="btn btn-sm btn-primary" type="button" (click)="onClickEditUserData()">
@@ -18,9 +18,9 @@
           <label for="name">Nombre Completo</label>
         </div>
         <div class="col-sm pl-2">
-          <input *ngIf="edit.user" type="text" name="name" [(ngModel)]="user.name" class="form-control" placeholder="Nombre Completo"
+          <input *ngIf="edit.profile" type="text" name="name" [(ngModel)]="profile.name" class="form-control" placeholder="Nombre Completo"
             required autofocus />
-          <div *ngIf="!edit.user" class="form-control disabled">{{user.name}}</div>
+          <div *ngIf="!edit.profile" class="form-control disabled">{{profile.name}}</div>
         </div>
       </div>
       <div class="row no-gutters m-3">
@@ -28,9 +28,9 @@
           <label for="email">Email</label>
         </div>
         <div class="col-sm pl-2">
-          <input *ngIf="edit.user" type="email" name="email" [(ngModel)]="user.email" class="form-control" placeholder="Email" required
+          <input *ngIf="edit.profile" type="email" name="email" [(ngModel)]="profile.email" class="form-control" placeholder="Email" required
           />
-          <div *ngIf="!edit.user" class="form-control disabled">{{user.email}}</div>
+          <div *ngIf="!edit.profile" class="form-control disabled">{{profile.email}}</div>
         </div>
       </div>
       <div class="row no-gutters m-3">
@@ -38,9 +38,9 @@
           <label for="telefono">Teléfono</label>
         </div>
         <div class="col-sm pl-2">
-          <input *ngIf="edit.user" type="number" name="telefono" class="form-control" [(ngModel)]="user.phone" placeholder="Teléfono"
+          <input *ngIf="edit.profile" type="number" name="telefono" class="form-control" [(ngModel)]="profile.phone" placeholder="Teléfono"
             required />
-          <div *ngIf="!edit.user" class="form-control disabled">{{user.phone}}</div>
+          <div *ngIf="!edit.profile" class="form-control disabled">{{profile.phone}}</div>
         </div>
       </div>
       <div class="row no-gutters m-3">
@@ -48,9 +48,9 @@
           <label for="direccion">Dirección</label>
         </div>
         <div class="col-sm pl-2">
-          <textarea *ngIf="edit.user" name="direccion" name="direccion" cols="30" rows="3" [(ngModel)]="user.address" class="form-control"
+          <textarea *ngIf="edit.profile" name="direccion" name="direccion" cols="30" rows="3" [(ngModel)]="profile.address" class="form-control"
             placeholder="Dirección"></textarea>
-          <div *ngIf="!edit.user" class="form-control textarea disabled">{{user.address}}</div>
+          <div *ngIf="!edit.profile" class="form-control textarea disabled">{{profile.address}}</div>
         </div>
       </div>
       <div class="row no-gutters m-3">
@@ -58,12 +58,12 @@
           <label for="descripcion">Descripción</label>
         </div>
         <div class="col-sm pl-2">
-          <textarea *ngIf="edit.user" name="descripcion" name="descripcion" [(ngModel)]="user.description" cols="30" rows="3" class="form-control"
+          <textarea *ngIf="edit.profile" name="descripcion" name="descripcion" [(ngModel)]="profile.description" cols="30" rows="3" class="form-control"
             placeholder="Descripción"></textarea>
-          <div *ngIf="!edit.user" class="form-control textarea disabled">{{user.description}}</div>
+          <div *ngIf="!edit.profile" class="form-control textarea disabled">{{profile.description}}</div>
         </div>
       </div>
-      <div class="text-center m-3" *ngIf="edit.user">
+      <div class="text-center m-3" *ngIf="edit.profile">
         <button type="button" class="btn btn-success" (click)="onClickRegisterUserData()">
           <i class="fa fa-save"></i> Guardar</button>
       </div>
@@ -90,8 +90,8 @@
               <h2>{{job.company}}</h2>
               <h4>{{job.title}}</h4>
               <p>
-                <span>{{job.from}}</span> -
-                <span>{{job.to}}</span>
+                <span>{{job.from | date: 'mediumDate'}}</span> -
+                <span>{{job.to | date: 'mediumDate'}}</span>
               </p>
               <p>{{job.description}}</p>
             </li>
@@ -104,7 +104,7 @@
           <label for="titulo-trabajo">Título de Trabajo</label>
         </div>
         <div class="col-sm pl-2">
-          <input type="text" name="title" [(ngModel)]="job.title" class="form-control" placeholder="Título de Trabajo" required>
+          <input type="text" name="jobTitle" [(ngModel)]="job.title" class="form-control" placeholder="Título de Trabajo" required>
         </div>
       </div>
 
@@ -170,8 +170,8 @@
             <h2>{{course.institute}}</h2>
             <h4>{{course.course}}</h4>
             <p>
-              <span>{{course.from}}</span> -
-              <span>{{course.to}}</span>
+              <span>{{course.from | date: 'mediumDate'}}</span> -
+              <span>{{course.to | date: 'mediumDate'}}</span>
             </p>
             <p>{{course.description}}</p>
           </li>
@@ -183,7 +183,7 @@
           <label for="nombre-curso">Nombre del curso</label>
         </div>
         <div class="col-sm pl-2">
-          <input type="text" name="title" [(ngModel)]="course.course" class="form-control" placeholder="Nombre del curso" required>
+          <input type="text" name="educationTitle" [(ngModel)]="course.course" class="form-control" placeholder="Nombre del curso" required>
         </div>
       </div>
 
@@ -248,7 +248,7 @@
         <div class="w-100"></div>
         <div class="col text-center mt-3">
           <button type="button" class="btn btn-success" (click)="onClickAddSkill()">
-            <i class="fa fa-plus"></i> Añadir</button>
+            <i class="fa fa-plus"></i> Guardar</button>
         </div>
       </div>
     </div>

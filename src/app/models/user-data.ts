@@ -6,7 +6,7 @@ export class UserData {
     public address: string;
     public description: string;
     public abilities: any;
-    public education: any;
+    public educations: any;
     public experiences: any;
 
     constructor() {

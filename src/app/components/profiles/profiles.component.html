@@ -1,20 +1,11 @@
 <div class="container-fluid">
   <h1 class="my-3">Lista de Perfiles</h1>
-  <es-ng-table [data]="data">
-    <es-ng-table-col field="state" [checkbox]="true"></es-ng-table-col>
-    <es-ng-table-col title="ID" field="id"></es-ng-table-col>
+  <es-ng-table *ngIf="profiles && profiles.length > 0" [data]="profiles">
     <es-ng-table-col title="Nombre" field="name"></es-ng-table-col>
-    <es-ng-table-col title="Opciones" field="id">
+    <es-ng-table-col title="Acciones" field="id">
       <ng-template #textTemplate let-row="row" let-value="value" let-index="index" let-formatter="formatter">
         <div class="btn-group">
-          <button type="button" class="btn btn-primary">Ver</button>
-          <!-- [routerLink]="'/profile/'+value" -->
-          <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="sr-only">Acciones de Usuario</span>
-          </button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Borrar</a>
-          </div>
+          <button type="button" [routerLink]="['/profile/' + value]" class="btn btn-primary">Ver</button>
         </div>
       </ng-template>
     </es-ng-table-col>

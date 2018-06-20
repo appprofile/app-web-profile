@@ -1,0 +1,115 @@
+<div *ngIf="profile" class="profile-view container">
+
+  <div class="profile-view-header">
+    <div class="row ">
+      <div class="col">
+        <h1 class="my-3">{{ profile.name }}</h1>
+      </div>
+
+      <div *ngIf="isCurrentUser()" class="col-2">
+        <button [routerLink]="['/profile']" class="btn btn-primary m-3"> Editar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="profile-view-content">
+
+    <div class="profile-view-personal-data">
+      <div class="row">
+        <div class="col-2">
+          Email:
+        </div>
+        <div class="col">
+          {{ profile.email }}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-2">
+          Teléfono:
+        </div>
+        <div class="col">
+          {{ profile.phone }}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-2">
+          Dirección:
+        </div>
+        <div class="col">
+          {{ profile.address }}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-2">
+          Descripción:
+        </div>
+        <div class="col">
+          {{ profile.description }}
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="profile.experiences && profile.experiences.length > 0" class="profile-view-experiences">
+
+      <h4 class="mt-5 mb-2">Experiencia</h4>
+      <div class="border rounded m-0 p-0">
+        <div class="border-bottom p-3">
+          <div>
+            <ul class="list-group">
+              <li class="list-group-item" *ngFor="let experience of profile.experiences; let i = index">
+                <h2>{{experience.company}}</h2>
+                <h4>{{experience.title}}</h4>
+                <p>
+                  <span>{{experience.from | date: 'mediumDate'}}</span> -
+                  <span>{{experience.to | date: 'mediumDate'}}</span>
+                </p>
+                <p>{{experience.description}}</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div *ngIf="profile.educations && profile.educations.length > 0" class="profile-view-educations">
+
+      <h4 class="mt-5 mb-2">Educación</h4>
+      <div class="border rounded m-0 p-0">
+        <div class="border-bottom p-3">
+          <div>
+            <ul class="list-group">
+              <li class="list-group-item" *ngFor="let education of profile.educations; let i = index">
+                <h2>{{education.company}}</h2>
+                <h4>{{education.title}}</h4>
+                <p>
+                  <span>{{education.from | date: 'mediumDate'}}</span> -
+                  <span>{{education.to | date: 'mediumDate'}}</span>
+                </p>
+                <p>{{education.description}}</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div *ngIf=" profile.abilities && profile.abilities.length > 0" class="profile-view-abilities">
+      <h4 class="mt-5 mb-2">Habilidades</h4>
+      <div class="border rounded m-0 p-0">
+        <div class="m-3">
+          <h4>
+            <span class="badge badge-pill badge-secondary font-weight-normal badged" *ngFor="let abilitie of profile.abilities; let i = index">
+              {{ abilitie }}
+            </span>
+          </h4>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProfileViewPageComponent } from './profile-view-page.component';
+import { ProfileViewComponent } from './profile-view.component';
 
 describe('ProfileViewPageComponent', () => {
-  let component: ProfileViewPageComponent;
-  let fixture: ComponentFixture<ProfileViewPageComponent>;
+  let component: ProfileViewComponent;
+  let fixture: ComponentFixture<ProfileViewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProfileViewPageComponent ]
+      declarations: [ ProfileViewComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProfileViewPageComponent);
+    fixture = TestBed.createComponent(ProfileViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

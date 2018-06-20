@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FlashMessagesService } from 'angular2-flash-messages';
+/* Services. */
 import { ProfileService } from '@services/profile/profile.service';
 
 @Component({
@@ -9,8 +10,9 @@ import { ProfileService } from '@services/profile/profile.service';
 })
 export class ProfilesComponent implements OnInit {
 
-  public data;
+  /* Attributes. */
   public errorProps;
+  public profiles;  
   public total;
 
   constructor(public profileService: ProfileService,
@@ -19,8 +21,9 @@ export class ProfilesComponent implements OnInit {
   ngOnInit() {
     this.errorProps = { cssClass: 'alert-danger', timeout: 4000 };
 
+    /* Get profiles. */
     this.profileService.getUserData().subscribe(data => {
-      this.data = data.profiles;
+      this.profiles = data.profiles;
       this.total = data.total;
     }, error => {
       this.flashMessagesService.show(`Error leyendo los datos de usuarios. ${error.error.error_message}`, this.errorProps);

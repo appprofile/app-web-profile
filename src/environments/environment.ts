@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  publichost: 'appwebprofile.localtunnel.me',
+  publichost: '25.85.82.83:8080',
   auth0: {
     domain: 'app-profile.auth0.com',
     clientid: 'lUnF8NKF9FBehcR3YcAxe4z0HQo3C2z3',
@@ -14,8 +14,8 @@ export const environment = {
     scope: 'openid profile email'
   },
   api: {
-    domain: 'de3c6101.ngrok.io',
-    port: '80',
+    domain: '7de05714.ngrok.io',
+    port: '',
     version: 'v1'
   }
 };

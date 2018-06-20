@@ -5,7 +5,7 @@ import { Auth0Service } from '@services/auth0/auth0.service';
 @Injectable()
 export class ScopeGuard implements CanActivate {
 
-  constructor(public auth0Service: Auth0Service, public router: Router) {}
+  constructor(public auth0Service: Auth0Service, public router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
     const scopes = (route.data as any).expectedScopes;
